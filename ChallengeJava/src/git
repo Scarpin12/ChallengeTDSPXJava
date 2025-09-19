@@ -1,0 +1,17 @@
+# 1. Inicie o Git Flow (faça isso apenas uma vez)
+git flow init
+
+# 2. Comece a trabalhar em uma nova funcionalidade
+git flow feature start minha-primeira-feature
+
+# ... crie seus arquivos, faça commits ...
+# git add .
+# git commit -m "Minha alteração"
+
+# 3. Termine a funcionalidade e integre no develop
+git flow feature finish minha-primeira-feature
+
+# 4. Envie suas alterações para o GitHub
+# Lembre-se que o git flow é local. Você precisa enviar os branches para o repositório remoto.
+git push origin develop
+git push origin main
