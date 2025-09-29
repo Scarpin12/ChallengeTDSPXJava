@@ -1,2 +1,3 @@
 # Ignora especificamente o arquivo de Credenciais
-/src/model/vo/Credenciais.java
+./src/model/vo/Credenciais.java
+./src/model/dao/Conexao.java

@@ -1,22 +1,30 @@
 package model.vo;
 
 public class Paciente extends Pessoa {
-    private String endereco;
     private Patologia patologia;
+    private Cuidador cuidador;
+    private Patologia patologiaEscolhida;
 
-    public Paciente( String nome, String cpf, int idade, String email, String telefoneContato /*String patologia*/, String endereco){
+    public Paciente(String nome, String cpf, int idade, String email, String telefoneContato,  Patologia patologiaEscolhida, Patologia patologia, Cuidador cuidador) {
         super(nome, cpf, idade, email, telefoneContato);
-        //this.patologia = patologia;
-        this.endereco = endereco;
+        this.patologiaEscolhida = patologiaEscolhida;
+        this.patologia = patologia;
+        this.cuidador = cuidador;
+
+    }
+    public Paciente(){
     }
 
-
-    public String getEndereco() {
-        return endereco;
+    public Paciente(String nome, String cpf, int idade, String email, String telefone, Patologia patologiaEscolhida) {
+        this.patologiaEscolhida = patologiaEscolhida;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public Patologia getPatologiaEscolhida() {
+        return patologiaEscolhida;
+    }
+
+    public void setPatologiaEscolhida(Patologia patologiaEscolhida) {
+        this.patologiaEscolhida = patologiaEscolhida;
     }
 
     public Patologia getPatologia() {
@@ -25,5 +33,13 @@ public class Paciente extends Pessoa {
 
     public void setPatologia(Patologia patologia) {
         this.patologia = patologia;
+    }
+
+    public Cuidador getCuidador() {
+        return cuidador;
+    }
+
+    public void setCuidador(Cuidador cuidador) {
+        this.cuidador = cuidador;
     }
 }

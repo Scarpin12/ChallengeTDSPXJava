@@ -1,31 +1,40 @@
 package model.vo;
 
 public class Patologia {
-    private int id;
-    private String nome;
-    private int CID10;
+    private int idPatologia;
+    private String nomePatologia;
+    private String cid10;
 
-    public int getId() {
-        return id;
+    public Patologia(int idPatologia,String nomePatologia, String cid10) {
+        this.idPatologia = idPatologia;
+        this.nomePatologia = nomePatologia;
+        this.cid10 = cid10;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Patologia() {
     }
 
-    public String getNome() {
-        return nome;
+    public int getidPatologia() {
+        return idPatologia;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIdPatologia(int id) {
+        this.idPatologia = idPatologia;
     }
 
-    public int getCID10() {
-        return CID10;
+    public String getnomePatologia() {
+        return nomePatologia;
     }
 
-    public void setCID10(int CID10) {
-        this.CID10 = CID10;
+    public void setnomePatologia(String nome) {
+        this.nomePatologia = nomePatologia;
+    }
+
+    public String getCid10() {
+        return cid10;
+    }
+
+    public void setCid10(String cid10) {
+        this.cid10 = cid10;
     }
 }
