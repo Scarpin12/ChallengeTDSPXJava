@@ -1,5 +1,6 @@
 package view;
 import controler.PacienteController;
+import model.dao.PatologiaDAO;
 import model.vo.Paciente;
 import model.vo.Patologia;
 
@@ -41,46 +42,48 @@ public class CadastroPaciente {
     }
 
     public void criarNovoPaciente() {
-        if (sc.hasNextLine()) {
-            sc.nextLine();
-        }
-        System.out.println("Olá, vamos Cadastrar um novo paciente");
+        System.out.println("\n--- Cadastro de Novo Paciente ---");
 
-        System.out.println("\nSelecione a patologia do paciente:");
-        List<Patologia> patologiasDisponiveis = pacienteController.listarPatologias();
+        // --- Seleção da Patologia ---
+        PatologiaDAO patologiaDAO = new PatologiaDAO(); // Temporariamente aqui para simplicidade
+        List<Patologia> patologiasDisponiveis = patologiaDAO.listarPatologia();
+
+        System.out.println("\nSelecione a patologia:");
         for (int i = 0; i < patologiasDisponiveis.size(); i++) {
-           System.out.println((i + 1) + patologiasDisponiveis.get(i).getnomePatologia());
-       }
-       System.out.print("Digite o número da opção: ");
-       int escolhaPatologia = sc.nextInt();
-       sc.nextLine();
-
-        patologiasDisponiveis.get(escolhaPatologia).getnomePatologia();
-       if (escolhaPatologia < 1 || escolhaPatologia > patologiasDisponiveis.size()) {
-            System.out.println("Opção inválida.");
+            System.out.println((i + 1) + " - " + patologiasDisponiveis.get(i).getnomePatologia());
         }
-        Patologia patologiaEscolhida = patologiasDisponiveis.get(escolhaPatologia - 1);
+        System.out.print("Digite o número da opção: ");
+        int escolha = sc.nextInt();
+        sc.nextLine(); // Limpa o buffer
+
+        if (escolha < 1 || escolha > patologiasDisponiveis.size()) {
+            System.out.println("Opção inválida. Cadastro cancelado.");
+            return;
+        }
+        Patologia patologiaEscolhida = patologiasDisponiveis.get(escolha - 1);
         System.out.println("Diagnóstico selecionado: " + patologiaEscolhida.getnomePatologia());
-
-
 
         // --- Coleta de Dados do Paciente ---
         System.out.println("\nAgora, os dados do paciente.");
+
+
         System.out.print("Nome: ");
         String nome = sc.nextLine();
+
         System.out.print("CPF: ");
         String cpf = sc.nextLine();
+
         System.out.print("Idade: ");
         int idade = sc.nextInt();
         sc.nextLine();
+
         System.out.print("Email: ");
         String email = sc.nextLine();
+
         System.out.print("Telefone de Contato: ");
         String telefoneContato = sc.nextLine();
 
-
         pacienteController.adicionarPaciente(nome, cpf, idade, email, telefoneContato, patologiaEscolhida);
-        System.out.println("Paciente cadastrado com sucesso!");
     }
 
     private void listaPacientes() {
