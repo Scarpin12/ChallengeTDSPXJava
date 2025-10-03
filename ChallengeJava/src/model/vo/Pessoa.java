@@ -8,9 +8,7 @@ abstract class Pessoa {
     private String email;
     private String telefoneContato;
 
-    //para listar pacientes com registro basico
     public Pessoa(String nome, String cpf, int idade, String email, String telefoneContato) {
-        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
@@ -18,8 +16,14 @@ abstract class Pessoa {
         this.telefoneContato = telefoneContato;
     }
 
-   public Pessoa(int id, String nome, String cpf, int idade, String email, String telefoneContato) {
-   }
+    public Pessoa(int id, String nome, String cpf, int idade, String email, String telefoneContato) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+        this.email = email;
+        this.telefoneContato = telefoneContato;
+    }
 
     public Pessoa() {
     }

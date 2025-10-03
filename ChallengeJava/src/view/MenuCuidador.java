@@ -1,15 +1,14 @@
 package view;
 import controler.CuidadorController;
-import controler.PacienteController;
 import model.vo.Cuidador;
 import java.util.List;
 import java.util.Scanner;
 
-public class CadastroCuidador {
+public class MenuCuidador {
     private CuidadorController cuidadorController;
     private Scanner sc;
 
-    public CadastroCuidador() {
+    public MenuCuidador() {
         this.cuidadorController = new CuidadorController();
         this.sc =new Scanner(System.in);
     }
@@ -17,74 +16,86 @@ public class CadastroCuidador {
     public void menuCuidador(){
         int opcao;
         do {
-            System.out.println("| Seje bem vindo!! escolha a uma das opções |");
-            System.out.println("1. Cadastro Cuidador ");
-            System.out.println("2. Listar Cuidadores ");
-            System.out.println("3. Atualizar Cuidador ");
-            System.out.println("4. Excluir Cuidador ");
+            System.out.println("\n=== CADASTRO DE CUIDADOR ===");
+            System.out.println("1. Cadastrar cuidador para este paciente");
+            System.out.println("2. Atualizar Cuidador ");
+            System.out.println("3. Lista de cuidadores ");
+            System.out.println("4. Excluir Cuidador");
             System.out.println("5. Sair...");
             opcao = sc.nextInt();
+            sc.nextLine();
 
             switch (opcao){
                 case 1 -> criarNovoCuidador();
-                case 2 -> listarCuidador();
-                case 3 -> atualizaCuidador();
+                case 2 -> atualizaCuidador();
+                case 3 -> listaCuidadores();
                 case 4 -> deletarCuidador();
-                case 5 -> System.out.println("Saindo....");
+                case 5 ->{
+                    System.out.println("Saindo....");
+                    return;}
                 default -> System.out.println("Opção invalida, tente novamente");
             }
-        }while (opcao != 5);
+        }while (opcao != 4);
     }
 
     public void criarNovoCuidador(){
-        System.out.println(" Ola, vamos criar um novo Cuidador");
+        System.out.println("\n--- CADASTRAR CUIDADOR VINCULADO ---");
 
-        System.out.println(" Insira o seu nome ");
-        String nome =sc.nextLine();
+        System.out.println("CPF do Paciente: ");
+        String cpfPaciente = sc.nextLine();
 
-        System.out.println(" Insira o seu cpf  ");
+        System.out.println("Nome do Cuidador: ");
+        String nome = sc.nextLine();
+
+        System.out.println("CPF do Cuidador: ");
         String cpf = sc.nextLine();
 
-        System.out.println(" Insira a sua idade");
+        System.out.println("Idade do Cuidador: ");
         int idade = sc.nextInt();
+        sc.nextLine();
 
-        System.out.println(" Insira o seu email ");
+        System.out.println("Email do Cuidador: ");
         String email = sc.nextLine();
 
-        System.out.println(" Insira o seu telefone ");
+        System.out.println("Telefone do Cuidador: ");
         String telefoneContato = sc.nextLine();
 
-        System.out.println(" Insira o seu correlacaoPaciente ");
+        System.out.println("Qual é o parentesco/vinculo com o paciente? ");
         String correlacaoPaciente = sc.nextLine();
-/// arrumar
-        //cuidadorController.adicionarCuidador(new Cuidador(nome, cpf, idade, email, telefoneContato, correlacaoPaciente));
-    }
 
-    private void listarCuidador(){
-        List<Cuidador> listarCuidadores = cuidadorController.listarCuidadors();
-
-        if (listarCuidadores.isEmpty()){
-            System.out.println(" Nenhum cuidador encontrado ");
-        }else{
-            System.out.println("=== Lista de cuidadores ===");
-            for (Cuidador cuidador : listarCuidadores) {
-                System.out.println(cuidador);
-            }
-        }
+        cuidadorController.adicionarCuidador(nome, cpf, idade, email, telefoneContato, correlacaoPaciente, cpfPaciente);
     }
 
     public void atualizaCuidador(){
+        List<Cuidador> cuidadores = cuidadorController.listarCuidadores();
+
+        if (cuidadores.isEmpty()) {
+            System.out.println("Nenhum Cuidador cadastrado.");
+            return;
+        }
+
+        System.out.print("Digite o número do Cuidador a atualizar: ");
+        int escolha = sc.nextInt();
+        sc.nextLine();
+
+        if (escolha < 1 || escolha > cuidadores.size()) {
+            System.out.println("Opção inválida!");
+            return;
+        }
+
+        Cuidador cuidadorAntigo = cuidadores.get(escolha - 1);
+        String cpfInicial = cuidadorAntigo.getCpf();
 
         System.out.println(" Ola, vamos atualizar um Cuidador");
 
         System.out.println(" Insira o nome ");
         String nome =sc.nextLine();
 
-        System.out.println(" Insira o cpf  ");
-        String cpf = sc.nextLine();
+        String cpf = cpfInicial;
 
         System.out.println(" Insira a idade");
         int idade = sc.nextInt();
+        sc.nextLine();
 
         System.out.println(" Insira o email ");
         String email = sc.nextLine();
@@ -94,14 +105,24 @@ public class CadastroCuidador {
 
         System.out.println(" Insira o correlacaoPaciente ");
         String correlacaoPaciente = sc.nextLine();
-/// arrumar
-        //cuidadorController.atualizarCuidador(new Cuidador(nome, cpf, idade, email, telefoneContato, correlacaoPaciente));
+
+        cuidadorController.atualizaCuidador(nome, cpf, idade, email, telefoneContato, correlacaoPaciente, cpfInicial);
     }
 
-    public void deletarCuidador(){
-        System.out.println("ID do cliente a ser deletado: ");
-        int id = sc.nextInt();
-        cuidadorController.excluirCuidador(id);
+    private void listaCuidadores() {
+        List<Cuidador> listaDeCuidadores = cuidadorController.listarCuidadores();
+
+        if (listaDeCuidadores.isEmpty()) {
+            System.out.println("\nNenhum Cuidador encontrado no sistema.");
+        } else {
+            System.out.println("\n=== Lista de Cuidador Cadastrados ===");
+        }
+    }
+
+    public void deletarCuidador() {
+        System.out.println("CPf do cliente a ser deletado: ");
+        String cpf = sc.nextLine();
+        cuidadorController.excluirCuidador(cpf);
     }
 
 }

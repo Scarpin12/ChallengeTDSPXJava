@@ -9,6 +9,12 @@ public class Cuidador extends Pessoa {
         this.correlacaoPaciente = correlacaoPaciente;
     }
 
+    public Cuidador(String nome, String cpf, int idade, String email, String telefoneContato, String correlacaoPaciente) {
+        super( nome, cpf, idade, email, telefoneContato);
+        this.correlacaoPaciente = correlacaoPaciente;
+    }
+
+
     public String getCorrelacaoPaciente() {
         return correlacaoPaciente;
     }

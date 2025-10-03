@@ -1,24 +1,26 @@
 package view;
+import controler.ConsultaController;
 import controler.PacienteController;
 import model.dao.PatologiaDAO;
+import model.vo.Consulta;
 import model.vo.Paciente;
 import model.vo.Patologia;
-
 import java.util.List;
 import java.util.Scanner;
 
-public class CadastroPaciente {
+public class MenuPaciente {
     private PacienteController pacienteController;
-    private  Scanner  sc;
 
-    public CadastroPaciente() {
+    private Scanner sc;
+
+    public MenuPaciente() {
         this.pacienteController = new PacienteController();
-        this.sc =new Scanner(System.in);
+
+        this.sc = new Scanner(System.in);
     }
 
     public void menuPaciente() {
         int opcao;
-        // CORREÇÃO: O loop agora vai até a opção 6 (Sair).
         do {
             System.out.println("\n| Seja bem-vindo(a)! Escolha uma das opções |");
             System.out.println("1. Cadastrar Paciente");
@@ -32,10 +34,13 @@ public class CadastroPaciente {
             switch (opcao) {
                 case 1 -> criarNovoPaciente();
                 case 2 -> listaPacientes();
-                case 3 -> atualizaPaciente();
+                case 3 -> atualizarPaciente();
                 case 4 -> deletarPacientes();
                 case 5 -> verproximasConsultas();
-                case 6 -> System.out.println("Saindo do sistema...");
+                case 6 -> {
+                    System.out.println("Saindo do sistema...");
+                    return;
+                }
                 default -> System.out.println("Opção inválida, tente novamente.");
             }
         } while (opcao != 6);
@@ -44,8 +49,7 @@ public class CadastroPaciente {
     public void criarNovoPaciente() {
         System.out.println("\n--- Cadastro de Novo Paciente ---");
 
-        // --- Seleção da Patologia ---
-        PatologiaDAO patologiaDAO = new PatologiaDAO(); // Temporariamente aqui para simplicidade
+        PatologiaDAO patologiaDAO = new PatologiaDAO();
         List<Patologia> patologiasDisponiveis = patologiaDAO.listarPatologia();
 
         System.out.println("\nSelecione a patologia:");
@@ -54,7 +58,7 @@ public class CadastroPaciente {
         }
         System.out.print("Digite o número da opção: ");
         int escolha = sc.nextInt();
-        sc.nextLine(); // Limpa o buffer
+        sc.nextLine();
 
         if (escolha < 1 || escolha > patologiasDisponiveis.size()) {
             System.out.println("Opção inválida. Cadastro cancelado.");
@@ -63,9 +67,8 @@ public class CadastroPaciente {
         Patologia patologiaEscolhida = patologiasDisponiveis.get(escolha - 1);
         System.out.println("Diagnóstico selecionado: " + patologiaEscolhida.getnomePatologia());
 
-        // --- Coleta de Dados do Paciente ---
-        System.out.println("\nAgora, os dados do paciente.");
 
+        System.out.println("\nAgora, os dados do paciente.");
 
         System.out.print("Nome: ");
         String nome = sc.nextLine();
@@ -84,75 +87,120 @@ public class CadastroPaciente {
         String telefoneContato = sc.nextLine();
 
         pacienteController.adicionarPaciente(nome, cpf, idade, email, telefoneContato, patologiaEscolhida);
+
     }
 
     private void listaPacientes() {
         List<Paciente> listaDePacientes = pacienteController.listarPacientes();
+
         if (listaDePacientes.isEmpty()) {
-            System.out.println("\nNenhum Paciente encontrado.");
+            System.out.println("\nNenhum Paciente encontrado no sistema.");
         } else {
             System.out.println("\n=== Lista de Pacientes Cadastrados ===");
-            for (Paciente paciente : listaDePacientes) {
-                System.out.println("Nome: " + paciente.getNome());
-
-                if (paciente.getPatologia() != null && paciente.getPatologia().getnomePatologia() != null) {
-                    System.out.println("Patologia: " + paciente.getPatologia().getnomePatologia());
-                } else {
-                    System.out.println("Patologia: (Não informada)");
-                }
-                System.out.println("-------------------------");
-            }
         }
     }
 
-    public void atualizaPaciente() {
 
-        System.out.println(" Ola, vamos atualizar um paciente");
+    public void atualizarPaciente() {
+        System.out.println("\n--- ATUALIZAR PACIENTE ---");
 
-        System.out.println(" Insira o nome ");
+        List<Paciente> pacientes = pacienteController.listarPacientes();
+
+        if (pacientes.isEmpty()) {
+            System.out.println("Nenhum paciente cadastrado.");
+            return;
+        }
+
+        System.out.print("Digite o número do paciente a atualizar: ");
+        int escolha = sc.nextInt();
+        sc.nextLine();
+
+        if (escolha < 1 || escolha > pacientes.size()) {
+            System.out.println("Opção inválida!");
+            return;
+        }
+
+        Paciente pacienteAntigo = pacientes.get(escolha - 1);
+        String cpfInicial = pacienteAntigo.getCpf();
+
+        PatologiaDAO patologiaDAO = new PatologiaDAO();
+        List<Patologia> patologiasDisponiveis = patologiaDAO.listarPatologia();
+
+        System.out.println("\nSelecione a patologia:");
+        for (int i = 0; i < patologiasDisponiveis.size(); i++) {
+            System.out.println((i + 1) + " - " + patologiasDisponiveis.get(i).getnomePatologia() + "\n");
+        }
+        System.out.print("Digite o número da opção: ");
+        int escolhap = sc.nextInt();
+        sc.nextLine(); // Limpa o buffer
+
+        if (escolhap < 1 || escolha > patologiasDisponiveis.size()) {
+            System.out.println("Opção inválida. Cadastro cancelado.");
+            return;
+        }
+        Patologia patologiaEscolhida = patologiasDisponiveis.get(escolhap - 1);
+        System.out.println("Diagnóstico selecionado: " + patologiaEscolhida.getnomePatologia());
+
+
+        System.out.println("\nAgora, os dados do paciente.");
+
+        System.out.print("Nome: ");
         String nome = sc.nextLine();
 
-        System.out.println(" Insira o cpf  ");
-        String cpf = sc.nextLine();
+        /// cpf continua o mesmo
+        String cpf = cpfInicial;
 
-        System.out.println(" Insira a idade");
+        System.out.print("Idade: ");
         int idade = sc.nextInt();
+        sc.nextLine();
 
-        System.out.println(" Insira o email ");
+        System.out.print("Email: ");
         String email = sc.nextLine();
 
-        System.out.println(" Insira o telefone ");
+        System.out.print("Telefone de Contato: ");
         String telefoneContato = sc.nextLine();
 
-        System.out.println("Agora vamos cadastrar o seu endereço");
-        System.out.println(" Insira o seu cep ");
-        String cep = sc.nextLine();
-        System.out.println("Insira o seu logradouro");
-        String logradouro = sc.nextLine();
-        System.out.println("Insira o numero");
-        String numero = sc.nextLine();
-        System.out.println("Insira a sua cidade");
-        String cidade = sc.nextLine();
-        System.out.println("Insira o seu estado");
-        String estado = sc.nextLine();
-
-        System.out.println("Agora Insira a sua Patologia");
-        String patologiaNome = sc.nextLine();
-/// arrumar depois
-//        pacienteController.atualizarPaciente(new Paciente(nome, cpf, idade, email, telefoneContato, patologiaEscolhida), new Endereco(cep,logradouro,numero,cidade,estado), new Patologia(patologiaNome));
+        pacienteController.atualizarPaciente(nome, cpf, idade, email, telefoneContato, patologiaEscolhida, cpfInicial);
     }
-    public void deletarPacientes(){
-        System.out.println("CPD do cliente a ser deletado: ");
-         String  cpf = sc.nextLine();
+
+    public void deletarPacientes() {
+        System.out.println("CPf do cliente a ser deletado: ");
+        sc.nextLine();
+        String cpf = sc.nextLine();
         pacienteController.excluirPaciente(cpf);
+    }
+
+
+    public void verproximasConsultas() {
+        System.out.println("\n--- PRÓXIMAS CONSULTAS ---");
+
+        ConsultaController consultaController = new ConsultaController();
+        List<Consulta> consultas = consultaController.listarProximasConsultas();
+
+        if (consultas.isEmpty()) {
+            System.out.println("Não há consultas agendadas.");
+            return;
         }
 
+        System.out.println(" Proximas Consultas: \n");
 
-    public void  verproximasConsultas(){
-        System.out.println("ola: " );
-    }
+        for (int i = 0; i < consultas.size(); i++) {
+            Consulta c = consultas.get(i);
+            System.out.println("   Consulta " + (i + 1) + ":");
+            System.out.println("   Paciente: " + c.getNomePaciente());
+            System.out.println("   Patologia: " + c.getPatologiaPaciente());
+            System.out.println("   Médico: Dr. " + c.getNomeMedico());
+            System.out.println("   Especialidade: " + c.getEspecialidadeMedico());
+            System.out.println("   Data/Hora: " + (c.getDataHora()));
+            System.out.println("   Status: " + c.getStatus());
 
+            if (c.getLinkTelemedicina() != null && !c.getLinkTelemedicina().isEmpty()) {
+                System.out.println(" Link: " + c.getLinkTelemedicina());
+            }
+            System.out.println("   ─────────────────────────");
+        }
     }
+}
 
 
 
