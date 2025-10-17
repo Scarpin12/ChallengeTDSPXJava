@@ -1,4 +1,5 @@
 package model.dao;
+import Service.Conexao;
 import model.vo.Patologia;
 import java.sql.Connection;
 import java.sql.SQLException;

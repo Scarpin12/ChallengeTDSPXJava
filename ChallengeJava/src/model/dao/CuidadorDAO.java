@@ -1,4 +1,5 @@
 package model.dao;
+import Service.Conexao;
 import model.vo.Cuidador;
 import java.sql.*;
 import java.util.ArrayList;

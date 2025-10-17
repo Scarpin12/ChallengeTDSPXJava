@@ -1,5 +1,5 @@
 package model.bo;
-import model.dao.Conexao;
+import Service.Conexao;
 import model.dao.PacienteDAO;
 import model.vo.Paciente;
 import model.vo.Patologia;

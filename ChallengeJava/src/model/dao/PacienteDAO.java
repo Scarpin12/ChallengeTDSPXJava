@@ -1,5 +1,7 @@
 package model.dao;
 import java.sql.*;
+
+import Service.Conexao;
 import model.vo.Paciente;
 import model.vo.Patologia;
 import java.util.ArrayList;
