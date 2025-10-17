@@ -1,5 +1,5 @@
 package model.bo;
-import model.dao.Conexao;
+import Service.Conexao;
 import model.dao.CuidadorDAO;
 import model.vo.Cuidador;
 import java.sql.Connection;

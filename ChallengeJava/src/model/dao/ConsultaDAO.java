@@ -1,4 +1,5 @@
 package model.dao;
+import Service.Conexao;
 import model.vo.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
