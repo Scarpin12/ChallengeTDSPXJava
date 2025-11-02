@@ -1,23 +1,25 @@
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\ConsultaController.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\CuidadorController.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\PacienteController.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\bo\ConsultaBo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\bo\CuidadorBo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\bo\PacienteBo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\dao\ConsultaDao.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\dao\CuidadorDao.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\dao\PacienteDao.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\dao\PatologiaDao.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\ConsultaVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\CuidadorVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\EspecialidadesVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\MedicoVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\PacienteVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\PatologiaVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\model\vo\PessoaVo.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ConexaoService.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\service\CredenciaisService.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\view\MenuCuidadorView.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\view\MenuPacienteView.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\view\MenuPrincipalView.java
-C:\Users\João Pedro Scarpin\Downloads\challenge-java (1)\challenge-java\src\main\java\conectecare\view\TesteMenusView.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\ConsultaController.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\CuidadorController.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\PacienteController.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\ConsultaDto.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\CuidadorDto.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\PacienteDto.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Consulta.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Cuidador.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Especialidade.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Medico.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Paciente.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Patologia.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Pessoa.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\ConsultaRepository.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\CuidadorRepository.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\MedicoRepository.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\PacienteRepository.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\PatologiaRepository.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ConexaoService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ConsultaService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\CredenciaisService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\CuidadorService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\MedicoService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\PacienteService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\PatologiaService.java

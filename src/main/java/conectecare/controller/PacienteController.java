@@ -1,44 +1,65 @@
 package conectecare.controller;
 
-import conectecare.model.bo.PacienteBo;
-import conectecare.model.dao.PacienteDao;
-import conectecare.model.vo.PacienteVo;
-import conectecare.model.vo.PatologiaVo;
+import conectecare.model.DTO.PacienteDto;
+import conectecare.model.Entity.Paciente;
+import conectecare.repository.PacienteRepository;
+import conectecare.service.PacienteService;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.ext.Provider;
+import org.hibernate.tool.schema.spi.SqlScriptException;
+import jakarta.ws.rs.core.*;
 
+import java.awt.*;
+import java.sql.SQLException;
 import java.util.List;
 
+@Path("/pacientes")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PacienteController {
-    private PacienteDao pacienteDAO;
-    private PacienteBo pacienteBO;
+
+    @Inject
+    PacienteService pacienteService;
 
 
-    public PacienteController() {
-        this.pacienteDAO = new PacienteDao();
-        this.pacienteBO = new PacienteBo();
+    //buscar
+    @GET
+    public Response listarTodos() {
+
+            List<Paciente> pacientes = pacienteService.listarTodosPacientes();
+            return Response.ok(pacientes).build();
+
     }
 
-    public void adicionarPaciente(String nome, String cpf, int idade, String email, String telefone, PatologiaVo patologiaEscolhida) { ///String cep, String logradouro, String numero, String cidade, String estado,Patologia patologiaEscolhida
+    @POST
+    public Response inserirPaciente(PacienteDto pacienteDTO, @Context UriInfo uriInfo) {
         try {
-            pacienteBO.cadastrarNovoPaciente (nome, cpf, idade, email, telefone, patologiaEscolhida);
-            System.out.println("Paciente cadastrado com sucesso!");
+            Paciente paciente = pacienteService.cadastrarNovoPaciente(pacienteDTO);
+
+            UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+            builder.path(Long.toString(paciente.getId()));
+
+            return Response.created(builder.build())
+                    .entity(paciente)
+                    .build();
 
         } catch (Exception e) {
-            System.err.println("FALHA AO CADASTRAR: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao criar paciente: " + e.getMessage())
+                    .build();
         }
     }
 
+    @PUT
+    public Response atualizarPaciente(PacienteDto pacienteDto, @PathParam("cpf") String cpfValidacao) throws ClassNotFoundException, SqlScriptException{
+        pacienteService.atualizacaoCadastro(pacienteDto, cpfValidacao);
+        return Response.ok().build();
 
-    public List<PacienteVo> listarPacientes() {
-        return pacienteBO.listarTodosPacientes();
     }
-
-    public void atualizarPaciente(String nome, String cpf, int idade, String email, String telefone, PatologiaVo patologiaEscolhida, String cpfValidacao) {
-        pacienteBO.atualizacaoCadastro(nome, cpf, idade, email, telefone, patologiaEscolhida, cpfValidacao);
-    }
-
-    public void excluirPaciente(String cpf ) {
-        pacienteDAO.excluirPaciente(cpf);
-    }
-
 
 }
