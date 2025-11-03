@@ -16,63 +16,37 @@ public class MedicoRepository implements PanacheRepository<Medico> {
     @Inject
     ConsultaRepository consultaRepository;  // ← Injeta o repository
 
-    /**
-     * Substitui: inserirMedico()
-     * USO: medicoRepository.persist(medico)
-     */
 
-    /**
-     * Busca médico por CRM
-     */
     public Optional<Medico> findByCrm(String crm) {
         return find("crm = ?1", crm).firstResultOptional();
     }
 
-    /**
-     * Busca médico por CPF
-     */
     public Optional<Medico> findByCpf(String cpf) {
         return find("cpf = ?1", cpf).firstResultOptional();
     }
 
-    /**
-     * Lista todos os médicos ordenados por nome
-     */
     public List<Medico> listarTodosMedicos() {
         return list("ORDER BY nome");
     }
 
-    /**
-     * Busca médicos por ID da especialidade
-     */
     public List<Medico> findByEspecialidadeId(Integer especialidadeId) {
         return find("especialidade.id = ?1 ORDER BY nome", especialidadeId).list();
     }
 
-    /**
-     * Busca médicos por nome (busca parcial)
-     */
+
     public List<Medico> findByNome(String nome) {
         return find("UPPER(nome) LIKE UPPER(?1) ORDER BY nome", "%" + nome + "%").list();
     }
 
-    /**
-     * Verifica se CRM já existe
-     */
+
     public boolean existsByCrm(String crm) {
         return count("crm = ?1", crm) > 0;
     }
 
-    /**
-     * Verifica se CPF já existe
-     */
     public boolean existsByCpf(String cpf) {
         return count("cpf = ?1", cpf) > 0;
     }
 
-    /**
-     * Substitui: MedicoDao.excluirMedico()
-     */
     @Transactional
     public boolean excluirMedico(String crm) {
         // Busca o médico pelo CRM
@@ -102,9 +76,6 @@ public class MedicoRepository implements PanacheRepository<Medico> {
         return true;
     }
 
-    /**
-     * Substitui: MedicoDao.atualizaMedico()
-     */
     @Transactional
     public void atualizarMedico(Medico medico, String crmValidacao) {
         // Busca o médico existente pelo CRM de validação
@@ -132,9 +103,6 @@ public class MedicoRepository implements PanacheRepository<Medico> {
         }
     }
 
-    /**
-     * Substitui: MedicoDao.listarTodosMedicos()
-     */
     public List<Medico> listarMedicosComEspecialidades() {
         String jpql = "SELECT m FROM Medico m " +
                 "LEFT JOIN FETCH m.especialidade " +
@@ -143,9 +111,6 @@ public class MedicoRepository implements PanacheRepository<Medico> {
         return getEntityManager().createQuery(jpql, Medico.class).getResultList();
     }
 
-    /**
-     * Busca médico que trata uma patologia específica
-     */
     public Optional<Medico> findByPatologiaId(Integer patologiaId) {
         String jpql = "SELECT m FROM Medico m " +
                 "JOIN m.especialidade e " +
@@ -155,9 +120,7 @@ public class MedicoRepository implements PanacheRepository<Medico> {
         return find(jpql, patologiaId).firstResultOptional();
     }
 
-    /**
-     * Conta total de médicos
-     */
+
     public long contarMedicos() {
         return count();
     }

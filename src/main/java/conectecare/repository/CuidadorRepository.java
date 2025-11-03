@@ -14,22 +14,20 @@ import java.util.Optional;
 public class CuidadorRepository implements PanacheRepository<Cuidador> {
 
     @Inject
-    PacienteRepository pacienteRepository;  // ← Injeta o repository
+    PacienteRepository pacienteRepository;
 
     @Transactional
     public boolean vincularCuidador(Integer idCuidador, String cpfPaciente) {
-        // Busca o cuidador (no próprio repository)
+
         Cuidador cuidador = findById(Long.valueOf(idCuidador));  // ← Agora funciona
         if (cuidador == null) {
             return false;
         }
 
-        // Busca o paciente pelo CPF (usando o repository injetado)
         Optional<Paciente> pacienteOpt = pacienteRepository.findByCpf(cpfPaciente);
         if (pacienteOpt.isEmpty()) {
             return false;
         }
-
         // Faz o vínculo
         Paciente paciente = pacienteOpt.get();
         paciente.setCuidadorAssociado(cuidador);
@@ -39,14 +37,13 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
 
         return true;
     }
-
     /**
      * Substitui: CuidadorDao.excluirCuidador()
      */
     @Transactional
     public boolean excluirCuidador(String cpf) {
         // Busca o cuidador pelo CPF
-        Optional<Cuidador> cuidadorOpt = find("cpf = ?1 and tipo = 'CUIDADOR'", cpf).firstResultOptional();
+        Optional<Cuidador> cuidadorOpt = find("cpf", cpf).firstResultOptional();
 
         if (cuidadorOpt.isEmpty()) {
             return false;
@@ -55,9 +52,9 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
         Cuidador cuidador = cuidadorOpt.get();
 
         // 1. Remove vínculos com pacientes (equivalente ao sqlRemoverVinculos)
-        List<Paciente> pacientesComEsteCuidador = find(
+        List<Paciente> pacientesComEsteCuidador = pacienteRepository.find(
                 "cuidadorAssociado.id = ?1", cuidador.getId()
-        ).firstResult();
+        ).list();
 
         for (Paciente paciente : pacientesComEsteCuidador) {
             paciente.setCuidadorAssociado(null);
@@ -76,7 +73,7 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
     @Transactional
     public void atualizaCuidador(Cuidador cuidador, String cpfValidacao) {
         // Busca o cuidador existente pelo CPF de validação
-        Optional<Cuidador> cuidadorExistenteOpt = find("cpf = ?1 and tipo = 'CUIDADOR'", cpfValidacao)
+        Optional<Cuidador> cuidadorExistenteOpt = find("cpf", cpfValidacao)
                 .firstResultOptional();
 
         if (cuidadorExistenteOpt.isPresent()) {
@@ -99,16 +96,17 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
      */
     public List<Cuidador> listarCuidadoresPacientes() {
         String jpql = "SELECT c FROM Cuidador c " +
-                "LEFT JOIN FETCH c.pacienteAssociado " +
+                "LEFT JOIN FETCH c.paciente " +
                 "ORDER BY c.nome";
 
         return getEntityManager().createQuery(jpql, Cuidador.class).getResultList();
     }
 
+
     /**
      * Método auxiliar: busca cuidador por CPF
      */
     public Optional<Cuidador> findByCpf(String cpf) {
-        return find("cpf = ?1 and tipo = 'CUIDADOR'", cpf).firstResultOptional();
+        return find("cpf", cpf).firstResultOptional();
     }
 }
