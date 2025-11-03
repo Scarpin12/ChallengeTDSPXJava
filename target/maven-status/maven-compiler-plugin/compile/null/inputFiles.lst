@@ -1,3 +1,5 @@
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\conexao\Conexao.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\conexao\Credenciais.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\ConsultaController.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\CuidadorController.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\PacienteController.java
@@ -16,9 +18,7 @@ C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\Cuidad
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\MedicoRepository.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\PacienteRepository.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\PatologiaRepository.java
-C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ConexaoService.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ConsultaService.java
-C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\CredenciaisService.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\CuidadorService.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\MedicoService.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\PacienteService.java

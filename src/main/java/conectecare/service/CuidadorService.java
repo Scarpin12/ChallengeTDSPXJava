@@ -1,7 +1,7 @@
 package conectecare.service;
+import conectecare.model.DTO.CuidadorDto;
 import conectecare.model.Entity.Cuidador;
 import conectecare.repository.CuidadorRepository;
-import conectecare.repository.PacienteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -14,54 +14,53 @@ public class CuidadorService {
     @Inject
     CuidadorRepository cuidadorRepository;
 
-    @Inject
-    PacienteRepository pacienteRepository;
-
-
     @Transactional
-    public void cadastrarEVincularCuidador(String nome, String cpfCuidador, Integer idade, String email,
-                                           String telefoneContato, String correlacaoPaciente, String cpfPaciente) {
+    public Cuidador cadastrarEVincularCuidador(CuidadorDto cuidadorDto) {
 
-        // 1. Cria o cuidador (equivalente ao CuidadorVo no DAO)
+        // 1. Cria e preenche a entidade Cuidador a partir do DTO
         Cuidador cuidador = new Cuidador();
-        cuidador.setNome(nome);
-        cuidador.setCpf(cpfCuidador);
-        cuidador.setIdade(idade);
-        cuidador.setEmail(email);
-        cuidador.setTelefoneContato(telefoneContato);
-        cuidador.setCorrelacaoPaciente(correlacaoPaciente);
+        cuidador.setNome(cuidadorDto.getNome());
+        cuidador.setCpf(cuidadorDto.getCpf());
+        cuidador.setIdade(cuidadorDto.getIdade());
+        cuidador.setEmail(cuidadorDto.getEmail());
+        cuidador.setTelefoneContato(cuidadorDto.getTelefone());
+        cuidador.setSenha(cuidadorDto.getSenha());
+        cuidador.setCorrelacaoPaciente(cuidadorDto.getCorrelacaoPaciente());
 
-        // 2. Salva o cuidador (equivalente ao cuidadorDAO.inserirCuidador)
+        // 2. Persiste o cuidador no banco de dados PRIMEIRO
         cuidadorRepository.persist(cuidador);
 
-        // 3. Vincula ao paciente (equivalente ao cuidadorDAO.vincularCuidador)
-        boolean vinculado = cuidadorRepository.vincularCuidador(cuidador.getId(), cpfPaciente);
-
-        if (!vinculado) {
-            throw new RuntimeException("Não foi possível vincular cuidador ao paciente");
+        // 3. Se um CPF de paciente foi fornecido, faz a vinculação
+        if (cuidadorDto.getCpfPaciente() != null && !cuidadorDto.getCpfPaciente().isEmpty()) {
+            boolean vinculado = cuidadorRepository.vincularCuidador(cuidador.getId(), cuidadorDto.getCpfPaciente());
+            if (!vinculado) {
+                // Lança uma exceção se o CPF do paciente não for encontrado
+                throw new RuntimeException("Não foi possível vincular cuidador ao paciente. Verifique se o CPF do paciente está correto.");
+            }
         }
 
-        System.out.println("Cuidador cadastrado e vinculado com sucesso!");
+        // 4. Retorna o cuidador criado (agora com ID)
+        return cuidador;
     }
 
 
     @Transactional
-    public void atualizacaoCadastro(String nome, String cpf, Integer idade, String email,
-                                    String telefone, String correlacaoPaciente, String cpfValidacao) {
+    public Cuidador atualizacaoCadastro(CuidadorDto cuidadorDto, String cpf) {
 
         // Cria objeto cuidador com novos dados
         Cuidador cuidadorAtualizado = new Cuidador();
-        cuidadorAtualizado.setNome(nome);
-        cuidadorAtualizado.setCpf(cpf);
-        cuidadorAtualizado.setIdade(idade);
-        cuidadorAtualizado.setEmail(email);
-        cuidadorAtualizado.setTelefoneContato(telefone);
-        cuidadorAtualizado.setCorrelacaoPaciente(correlacaoPaciente);
+        cuidadorAtualizado.setNome(cuidadorDto.getNome());
+        cuidadorAtualizado.setIdade(cuidadorDto.getIdade());
+        cuidadorAtualizado.setEmail(cuidadorDto.getEmail());
+        cuidadorAtualizado.setTelefoneContato(cuidadorDto.getTelefone());
+        cuidadorAtualizado.setSenha(cuidadorDto.getSenha());
+        cuidadorAtualizado.setCorrelacaoPaciente(cuidadorDto.getCorrelacaoPaciente());
 
         // Atualiza no banco (equivalente ao cuidadorDAO.atualizaCuidador)
-        cuidadorRepository.atualizaCuidador(cuidadorAtualizado, cpfValidacao);
+        cuidadorRepository.atualizaCuidador(cuidadorAtualizado, cpf);
 
         System.out.println("Cuidador atualizado com sucesso!");
+        return cuidadorAtualizado;
     }
 
 

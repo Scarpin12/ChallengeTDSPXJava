@@ -8,10 +8,6 @@ import java.util.List;
 @ApplicationScoped
 public class PatologiaRepository implements PanacheRepository<Patologia> {
 
-    /**
-     * Substitui: listarPatologia()
-     * O método listAll() já vem pronto
-     */
     public List<Patologia> listarPatologia() {
         return listAll();
     }

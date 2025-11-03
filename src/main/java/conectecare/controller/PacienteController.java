@@ -10,8 +10,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import jakarta.ws.rs.ext.Provider;
-import org.hibernate.tool.schema.spi.SqlScriptException;
 import jakarta.ws.rs.core.*;
 
 import java.awt.*;
@@ -29,7 +27,7 @@ public class PacienteController {
 
     //buscar
     @GET
-    public Response listarTodos() {
+    public Response listarPacientes() {
 
             List<Paciente> pacientes = pacienteService.listarTodosPacientes();
             return Response.ok(pacientes).build();
@@ -56,10 +54,29 @@ public class PacienteController {
     }
 
     @PUT
-    public Response atualizarPaciente(PacienteDto pacienteDto, @PathParam("cpf") String cpfValidacao) throws ClassNotFoundException, SqlScriptException{
-        pacienteService.atualizacaoCadastro(pacienteDto, cpfValidacao);
-        return Response.ok().build();
+    @Path("/{cpf}")
+    public Response atualizarPacientePorCpf(@PathParam("cpf") String cpf, PacienteDto pacienteDto) {
+        try {
+            Paciente pacienteAtualizado = pacienteService.atualizacaoCadastro(pacienteDto, cpf);
+            return Response.ok(pacienteAtualizado).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao atualizar paciente: " + e.getMessage()).build();
+        }
+    }
 
+    @DELETE
+    @Path("/{cpf}")
+    public Response deletarPaciente(@PathParam("cpf") String cpf) {
+        try {
+            pacienteService.excluirPaciente(cpf);
+            return Response.noContent().build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao deletar paciente: " + e.getMessage()).build();
+        }
     }
 
 }

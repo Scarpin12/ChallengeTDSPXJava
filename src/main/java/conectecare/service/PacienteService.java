@@ -74,7 +74,7 @@ public class PacienteService {
         }
 
         // Atualiza no banco (equivalente ao pacienteDAO.atualizaPaciente)
-        pacienteRepository.atualizaPaciente(pacienteAtualizado, cpfValidacao);
+        pacienteRepository.atualizaPaciente(pacienteDto, cpfValidacao);
 
         System.out.println("Paciente Atualizado com sucesso!");
         return pacienteAtualizado;

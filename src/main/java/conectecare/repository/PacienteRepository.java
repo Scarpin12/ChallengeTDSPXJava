@@ -1,6 +1,8 @@
 package conectecare.repository;
 
+import conectecare.model.DTO.PacienteDto;
 import conectecare.model.Entity.Paciente;
+import conectecare.model.Entity.Patologia;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
@@ -10,19 +12,10 @@ import java.util.Optional;
 @ApplicationScoped
 public class PacienteRepository implements PanacheRepository<Paciente> {
 
-    /**
-     * Substitui: PacienteDao.inserirPaciente()
-     * O método persist() já vem pronto - faz INSERT automático
-     * USO: pacienteRepository.persist(paciente)
-     */
-
-    /**
-     * Substitui: PacienteDao.excluirPaciente()
-     */
     @Transactional
     public boolean excluirPaciente(String cpf) {
         // Busca o paciente pelo CPF
-        Optional<Paciente> pacienteOpt = find("cpf = ?1 and tipo = 'PACIENTE'", cpf).firstResultOptional();
+        Optional<Paciente> pacienteOpt = find("cpf", cpf).firstResultOptional();
 
         if (pacienteOpt.isEmpty()) {
             return false;
@@ -42,33 +35,33 @@ public class PacienteRepository implements PanacheRepository<Paciente> {
         return true;
     }
 
-    /**
-     * Substitui: PacienteDao.atualizaPaciente()
-     */
     @Transactional
-    public void atualizaPaciente(Paciente paciente, String cpfValidacao) {
+    public void atualizaPaciente(PacienteDto pacienteDto, String cpfValidacao) {
         // Busca o paciente existente pelo CPF de validação
-        Optional<Paciente> pacienteExistenteOpt = find("cpf = ?1 and tipo = 'PACIENTE'", cpfValidacao)
+        Optional<Paciente> pacienteExistenteOpt = find("cpf", cpfValidacao)
                 .firstResultOptional();
 
         if (pacienteExistenteOpt.isPresent()) {
             Paciente pacienteExistente = pacienteExistenteOpt.get();
 
             // Atualiza os campos
-            pacienteExistente.setNome(paciente.getNome());
-            pacienteExistente.setIdade(paciente.getIdade());
-            pacienteExistente.setEmail(paciente.getEmail());
-            pacienteExistente.setTelefoneContato(paciente.getTelefoneContato());
-            pacienteExistente.setPatologia(paciente.getPatologia());
+            pacienteExistente.setNome(pacienteDto.getNome());
+            pacienteExistente.setIdade(pacienteDto.getIdade());
+            pacienteExistente.setEmail(pacienteDto.getEmail());
+            pacienteExistente.setTelefoneContato(pacienteDto.getTelefone());
+            if (pacienteDto.getIdPatologia() != null) {
+                Patologia patologia = getEntityManager().find(Patologia.class, Integer.valueOf(pacienteDto.getIdPatologia()));
+                    if (patologia != null) {
+                        pacienteExistente.setPatologia(patologia);
+                    }
+                }
+
 
             // O persist() faz UPDATE automaticamente quando o objeto já tem ID
             persist(pacienteExistente);
         }
     }
 
-    /**
-     * Substitui: PacienteDao.listarTodosPacientes()
-     */
     public List<Paciente> listarTodosPacientes() {
         String jpql = "SELECT p FROM Paciente p " +
                 "LEFT JOIN FETCH p.patologia " +
@@ -77,10 +70,7 @@ public class PacienteRepository implements PanacheRepository<Paciente> {
         return getEntityManager().createQuery(jpql, Paciente.class).getResultList();
     }
 
-    /**
-     * Método auxiliar: busca paciente por CPF
-     */
     public Optional<Paciente> findByCpf(String cpf) {
-        return find("cpf = ?1 and tipo = 'PACIENTE'", cpf).firstResultOptional();
+        return find("cpf", cpf).firstResultOptional();
     }
 }
