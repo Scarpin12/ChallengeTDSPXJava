@@ -1,4 +1,6 @@
 package conectecare.model.Entity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -7,24 +9,31 @@ import java.util.List;
 @DiscriminatorValue("PACIENTE")
 public class Paciente extends Pessoa {
 
-    public Paciente(int id, String nome, String cpf, int idade, String email, String telefoneContato, String senha, Patologia patologia) {
-        super(id, nome, cpf, idade, email, telefoneContato, senha);
+    public Paciente(int id, String nome, int idade, String email, String telefoneContato, String senha, Boolean aceitarTermo, Patologia patologia) {
+        super(id, nome, idade, email, telefoneContato, senha, aceitarTermo);
         this.patologia = patologia;
     }
 
     public Paciente() {
     }
 
+    @Column(name = "CPF_PACIENTE", unique = true, length = 14)
+    private String cpfPaciente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PATOLOGIA")
+    @JsonManagedReference("patologia-paciente")
+    private Patologia patologia;
+
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference("paciente-cuidador")
     @JoinColumn(name = "ID_CUIDADOR_ASSOCIADO")
     private Cuidador cuidadorAssociado;
 
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("paciente-consulta")
      private List<Consulta> consultas;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_PATOLOGIA")
-    private Patologia patologia;
 
 
     public Patologia getPatologia() {
@@ -50,62 +59,20 @@ public class Paciente extends Pessoa {
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
     }
+
+    public String getCpfPaciente() {
+        return cpfPaciente;
+    }
+
+    public void setCpfPaciente(String cpfPaciente) {
+        this.cpfPaciente = cpfPaciente;
+    }
+
+    //    public Enderecos getEndereco() {
+//        return endereco;
+//    }
+//
+//    public void setEndereco(Enderecos endereco) {
+//        this.endereco = endereco;
+//    }
 }
-
-
-
-//package conectecare.model.Entity;
-//
-//import jakarta.persistence.*;
-//        import java.util.List;
-//
-//@Entity
-//@DiscriminatorValue("PACIENTE")
-//public class Paciente extends Pessoa {
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "ID_PATOLOGIA")
-//    private Patologia patologia;
-//
-//    // ✅ RELACIONAMENTO 1-para-1 com Cuidador
-//    @OneToOne(fetch = FetchType.LAZY)  // ← IMPORTANTE: @OneToOne, não @ManyToOne
-//    @JoinColumn(name = "ID_CUIDADOR_ASSOCIADO")  // ← Coluna FK na tabela PESSOAS
-//    private Cuidador cuidadorAssociado;
-//
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Consulta> consultas;
-//
-//    // Construtores
-//    public Paciente() {
-//        super();
-//    }
-//
-//    public Paciente(String nome, String cpf, Integer idade, String email, String telefoneContato, String senha) {
-//        super(nome, cpf, idade, email, telefoneContato, senha);
-//    }
-//
-//    // Getters e Setters
-//    public Patologia getPatologia() {
-//        return patologia;
-//    }
-//
-//    public void setPatologia(Patologia patologia) {
-//        this.patologia = patologia;
-//    }
-//
-//    public Cuidador getCuidadorAssociado() {
-//        return cuidadorAssociado;
-//    }
-//
-//    public void setCuidadorAssociado(Cuidador cuidadorAssociado) {
-//        this.cuidadorAssociado = cuidadorAssociado;
-//    }
-//
-//    public List<Consulta> getConsultas() {
-//        return consultas;
-//    }
-//
-//    public void setConsultas(List<Consulta> consultas) {
-//        this.consultas = consultas;
-//    }
-//}

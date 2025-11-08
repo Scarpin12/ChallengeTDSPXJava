@@ -1,18 +1,18 @@
 package conectecare.model.Entity;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "CONSULTAS")
 public class Consulta {
 
-    public Consulta(int id, Paciente paciente, Medico medico, String dataHora, String status, String linkTelemedicina) {
+    public Consulta(int id, Paciente paciente, Medico medico, LocalDateTime dataHora, String status) {
         this.id = id;
         this.paciente = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
         this.status = status;
-        this.linkTelemedicina = linkTelemedicina;
     }
 
     public Consulta() {
@@ -25,6 +25,7 @@ public class Consulta {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("paciente-consulta")
     @JoinColumn(name = "ID_PACIENTE", nullable = false)
     private Paciente paciente;
 
@@ -33,10 +34,7 @@ public class Consulta {
     private Medico medico;
 
     @Column(name = "DATA_HORA", nullable = false)
-    private String dataHora;
-
-    @Column(name = "LINK_TELEMEDICINA", length = 255)
-    private String linkTelemedicina;
+    private LocalDateTime dataHora;
 
     @Column(name = "STATUS", length = 20, nullable = false)
     private String status = "AGENDADA";
@@ -65,20 +63,12 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public String getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(String dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public String getLinkTelemedicina() {
-        return linkTelemedicina;
-    }
-
-    public void setLinkTelemedicina(String linkTelemedicina) {
-        this.linkTelemedicina = linkTelemedicina;
     }
 
     public String getStatus() {

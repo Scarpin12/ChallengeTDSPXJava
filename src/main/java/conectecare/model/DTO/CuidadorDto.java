@@ -1,29 +1,47 @@
 package conectecare.model.DTO;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import conectecare.model.Entity.Cuidador;
 
-public class CuidadorDto {
+public class CuidadorDto  {
     private String nome;
-    private String cpf;
+    private String cpfCuidador;
+    private String cpfPaciente;
     private String email;
     private int idade;
-    private String telefone;
+    private String telefoneContato;
     private String senha;
+    private boolean aceitarTermo;
     private String correlacaoPaciente;
-    private String  cpfPaciente;
 
     public CuidadorDto() {
     }
 
-    public CuidadorDto(String nome, String cpf, String email, int idade, String telefone, String senha, String correlacaoPaciente, String cpfPaciente) {
+    public CuidadorDto(String nome, String cpfCuidador, String email, int idade, String telefoneContato, String senha, boolean aceitarTermo, String correlacaoPaciente, String cpfPaciente, String cep, String logradouro, String cidade, String estado, String complemento, String bairro, String localidade) {
+//        super(cep, logradouro, cidade, estado, complemento, bairro, localidade);
         this.nome = nome;
-        this.cpf = cpf;
+        this.cpfCuidador = cpfCuidador;
         this.email = email;
         this.idade = idade;
-        this.telefone = telefone;
+        this.telefoneContato = telefoneContato;
         this.senha = senha;
+        this.aceitarTermo = aceitarTermo;
         this.correlacaoPaciente = correlacaoPaciente;
         this.cpfPaciente = cpfPaciente;
+    }
+
+    public CuidadorDto(Cuidador cuidador) {
+        this.nome = cuidador.getNome();
+        this.cpfCuidador = cuidador.getCpfCuidador();
+        this.email = cuidador.getEmail();
+        this.idade = cuidador.getIdade();
+        this.telefoneContato = cuidador.getTelefoneContato();
+        this.aceitarTermo = cuidador.getAceitarTermo();
+        this.correlacaoPaciente = cuidador.getCorrelacaoPaciente();
+
+        if (cuidador.getPaciente() != null) {
+            this.cpfPaciente = cuidador.getPaciente().getCpfPaciente();
+        }
     }
 
     public String getNome() {
@@ -34,12 +52,12 @@ public class CuidadorDto {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getcpfCuidador() {
+        return cpfCuidador;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setcpfCuidador(String cpfCuidador) {
+        this.cpfCuidador = cpfCuidador;
     }
 
     public String getEmail() {
@@ -58,12 +76,12 @@ public class CuidadorDto {
         this.idade = idade;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneContato() {
+        return telefoneContato;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneContato(String telefoneContato) {
+        this.telefoneContato = telefoneContato;
     }
 
     public String getSenha() {
@@ -72,6 +90,14 @@ public class CuidadorDto {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean getAceitarTermo() {
+        return aceitarTermo;
+    }
+
+    public void setAceitarTermo(boolean aceitarTermo) {
+        this.aceitarTermo = aceitarTermo;
     }
 
     public String getCorrelacaoPaciente() {

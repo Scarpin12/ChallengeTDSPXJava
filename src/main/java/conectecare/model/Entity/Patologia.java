@@ -1,4 +1,6 @@
 package conectecare.model.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,10 +26,12 @@ public class Patologia {
     @Column(name = "NOMEPATOLOGIA", nullable = true, unique = true, length = 255)
     private String nomePatologia;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "patologias")
     private List<Especialidade> especialidades;
 
     @OneToMany(mappedBy = "patologia", fetch = FetchType.LAZY)
+    @JsonBackReference("patologia-paciente")
     private List<Paciente> pacientes;
 
     public Integer getId() {

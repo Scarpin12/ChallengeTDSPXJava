@@ -1,16 +1,17 @@
 package conectecare.service;
 
+import conectecare.model.DTO.ConsultaDto;
 import conectecare.model.Entity.Consulta;
 import conectecare.model.Entity.Medico;
 import conectecare.model.Entity.Paciente;
 import conectecare.repository.ConsultaRepository;
 import conectecare.repository.MedicoRepository;
-import conectecare.repository.PacienteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ConsultaService {
@@ -21,40 +22,38 @@ public class ConsultaService {
     @Inject
     MedicoRepository medicoRepository;
 
-    @Inject
-    PacienteRepository pacienteRepository;
 
-    public List<Consulta> listarProximasConsultas() {
-        return consultaRepository.listarProximasConsultas();
+    public List<ConsultaDto> listarProximasConsultas(Integer pacienteId) {
+        return consultaRepository.listarConsultasPorPaciente(pacienteId)
+                .stream().map(ConsultaDto::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public void cadastrarConsultaAutomatica(Paciente paciente, Integer idPatologia) {
-        // Busca médico para a patologia (equivalente ao MedicoPatologia no BO)
+    public Consulta cadastrarConsultaAutomatica(Paciente paciente, Integer idPatologia) {
         Medico medico = buscarMedicoPorPatologia(idPatologia);
 
         if (medico != null) {
-            // Cria a consulta (equivalente ao INSERT no BO)
             Consulta consulta = new Consulta();
             consulta.setPaciente(paciente);
             consulta.setMedico(medico);
-            consulta.setDataHora(String.valueOf(LocalDateTime.now().plusDays(7))); // 7 dias depois
+            consulta.setDataHora(LocalDateTime.parse(String.valueOf(LocalDateTime.now().plusDays(7)))); // 7 dias depois
             consulta.setStatus("AGENDADA");
-            consulta.setLinkTelemedicina("https://meet.google.com/abc-defg-hij");
 
             // Salva a consulta
             consultaRepository.persist(consulta);
 
             System.out.println("Consulta agendada para o paciente!");
+            return consulta;
         } else {
             System.out.println("Nenhum médico encontrado para patologia " + idPatologia);
         }
+        return null;
     }
 
     private Medico buscarMedicoPorPatologia(Integer idPatologia) {
-        // Busca médico por patologia (usando o repository)
         return medicoRepository.findByPatologiaId(idPatologia)
-                .orElse(null); // Retorna null se não encontrar, igual ao BO original
+                .orElse(null);
     }
 
     public List<Consulta> listarPorPaciente(Integer pacienteId) {
@@ -63,5 +62,20 @@ public class ConsultaService {
 
     public List<Consulta> listarPorMedico(Integer medicoId) {
         return consultaRepository.findByMedicoId(medicoId);
+    }
+
+    @Transactional
+    public Consulta atualizarConsulta(Integer id, Consulta consultaAtualizada) {
+        Consulta consulta = consultaRepository.findById(Long.valueOf(id));
+        if (consulta != null) {
+            consulta.setDataHora(consultaAtualizada.getDataHora());
+            consulta.setStatus(consultaAtualizada.getStatus());
+        }
+        return consulta;
+    }
+
+    @Transactional
+    public boolean deletarConsulta(Integer id) {
+        return consultaRepository.deleteById(Long.valueOf(id));
     }
 }

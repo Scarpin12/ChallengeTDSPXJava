@@ -1,12 +1,12 @@
 package conectecare.repository;
 
+import conectecare.model.DTO.CuidadorDto;
 import conectecare.model.Entity.Cuidador;
 import conectecare.model.Entity.Paciente;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
     @Transactional
     public boolean vincularCuidador(Integer idCuidador, String cpfPaciente) {
 
-        Cuidador cuidador = findById(Long.valueOf(idCuidador));  // ← Agora funciona
+        Cuidador cuidador = findById(Long.valueOf(idCuidador));
         if (cuidador == null) {
             return false;
         }
@@ -28,22 +28,18 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
         if (pacienteOpt.isEmpty()) {
             return false;
         }
-        // Faz o vínculo
         Paciente paciente = pacienteOpt.get();
         paciente.setCuidadorAssociado(cuidador);
 
-        // Salva usando o repository injetado
         pacienteRepository.persist(paciente);
 
         return true;
     }
-    /**
-     * Substitui: CuidadorDao.excluirCuidador()
-     */
+
     @Transactional
     public boolean excluirCuidador(String cpf) {
-        // Busca o cuidador pelo CPF
-        Optional<Cuidador> cuidadorOpt = find("cpf", cpf).firstResultOptional();
+
+        Optional<Cuidador> cuidadorOpt = find("cpfCuidador", cpf).firstResultOptional();
 
         if (cuidadorOpt.isEmpty()) {
             return false;
@@ -51,7 +47,6 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
 
         Cuidador cuidador = cuidadorOpt.get();
 
-        // 1. Remove vínculos com pacientes (equivalente ao sqlRemoverVinculos)
         List<Paciente> pacientesComEsteCuidador = pacienteRepository.find(
                 "cuidadorAssociado.id = ?1", cuidador.getId()
         ).list();
@@ -61,19 +56,15 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
             pacienteRepository.persist(paciente);
         }
 
-        // 2. Exclui o cuidador (equivalente ao sqlExcluirCuidador)
         delete(cuidador);
 
         return true;
     }
 
-    /**
-     * Substitui: CuidadorDao.atualizaCuidador()
-     */
     @Transactional
     public void atualizaCuidador(Cuidador cuidador, String cpfValidacao) {
-        // Busca o cuidador existente pelo CPF de validação
-        Optional<Cuidador> cuidadorExistenteOpt = find("cpf", cpfValidacao)
+
+        Optional<Cuidador> cuidadorExistenteOpt = find("cpfCuidador", cpfValidacao)
                 .firstResultOptional();
 
         if (cuidadorExistenteOpt.isPresent()) {
@@ -86,27 +77,15 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
             cuidadorExistente.setTelefoneContato(cuidador.getTelefoneContato());
             cuidadorExistente.setCorrelacaoPaciente(cuidador.getCorrelacaoPaciente());
 
-            // O persist() faz UPDATE automaticamente quando o objeto já tem ID
             persist(cuidadorExistente);
         }
     }
 
-    /**
-     * Substitui: CuidadorDao.listarCuidadoresPacientes()
-     */
     public List<Cuidador> listarCuidadoresPacientes() {
-        String jpql = "SELECT c FROM Cuidador c " +
-                "LEFT JOIN FETCH c.paciente " +
-                "ORDER BY c.nome";
-
-        return getEntityManager().createQuery(jpql, Cuidador.class).getResultList();
+        return list("ORDER BY nome");
     }
 
-
-    /**
-     * Método auxiliar: busca cuidador por CPF
-     */
     public Optional<Cuidador> findByCpf(String cpf) {
-        return find("cpf", cpf).firstResultOptional();
+        return find("cpfCuidador", cpf).firstResultOptional();
     }
 }

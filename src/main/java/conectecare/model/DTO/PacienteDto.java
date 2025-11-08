@@ -1,30 +1,33 @@
 package conectecare.model.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PacienteDto {
     private String nome;
-    private String cpf;
+    private String cpfPaciente;
     private Integer idade;
     private String email;
-    private String telefone;
+    private String telefoneContato;
     private String senha;
+    private Boolean aceitarTermo;
     private Integer idPatologia;
 
-    // Construtor vazio
+
     public PacienteDto() {
     }
 
-    // Construtor com parâmetros
-    public PacienteDto(String nome, String cpf, Integer idade, String email, String telefone,String senha, Integer idPatologia) {
+    public PacienteDto(String nome, String cpfPaciente, Integer idade, String email, String telefoneContato,String senha, boolean aceitarTermo, Integer idPatologia, String cep, String logradouro, String cidade, String estado, String complemento, String bairro, String localidade) {
+//        super(cep, logradouro, cidade, estado, complemento, bairro, localidade);
         this.nome = nome;
-        this.cpf = cpf;
+        this.cpfPaciente = cpfPaciente;
         this.idade = idade;
         this.email = email;
-        this.telefone = telefone;
+        this.telefoneContato = telefoneContato;
         this.senha = senha;
+        this.aceitarTermo = aceitarTermo;
         this.idPatologia = idPatologia;
     }
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -33,12 +36,12 @@ public class PacienteDto {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCpfPaciente() { // C maiúsculo
+        return cpfPaciente;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpfPaciente(String cpfPaciente) { // C maiúsculo e removido o 'f'
+        this.cpfPaciente = cpfPaciente;
     }
 
     public Integer getIdade() {
@@ -57,12 +60,12 @@ public class PacienteDto {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneContato() {
+        return telefoneContato;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneContato(String telefone) {
+        this.telefoneContato = telefoneContato;
     }
 
     public String getSenha() {
@@ -71,6 +74,14 @@ public class PacienteDto {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Boolean getAceitarTermo() {
+        return aceitarTermo;
+    }
+
+    public void setAceitarTermo(Boolean aceitarTermo) {
+        this.aceitarTermo = aceitarTermo;
     }
 
     public Integer getIdPatologia() {

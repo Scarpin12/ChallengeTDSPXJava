@@ -1,13 +1,15 @@
 conectecare\service\ConsultaService.class
+conectecare\model\Entity\Enderecos.class
 conectecare\controller\ConsultaController.class
+conectecare\model\DTO\ViaCepDto.class
 conectecare\model\DTO\ConsultaDto.class
 conectecare\repository\PatologiaRepository.class
 conectecare\controller\CuidadorController.class
 conectecare\repository\PacienteRepository.class
 conectecare\conexao\Conexao.class
 conectecare\model\Entity\Patologia.class
+conectecare\controller\ViaCepController.class
 conectecare\model\Entity\Especialidade.class
-conectecare\service\PatologiaService.class
 conectecare\service\PacienteService.class
 conectecare\model\Entity\Medico.class
 conectecare\repository\ConsultaRepository.class
@@ -20,6 +22,6 @@ conectecare\model\DTO\CuidadorDto.class
 conectecare\model\Entity\Cuidador.class
 conectecare\controller\PacienteController.class
 conectecare\service\CuidadorService.class
-conectecare\service\MedicoService.class
+conectecare\service\ViaCepService.class
 conectecare\model\Entity\Paciente.class
 conectecare\model\Entity\Pessoa.class

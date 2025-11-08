@@ -1,34 +1,40 @@
 package conectecare.model.DTO;
 
+import conectecare.model.Entity.Consulta;
+
 import java.time.LocalDateTime;
 
 public class ConsultaDto {
-    private LocalDateTime dataHora;
+    private String paciente;
+    private String medico;
     private String status;
-    private String observacoes;
-    private Long pacienteId;
-    private Long cuidadorId;
+    private String patologia;
+    private String especialidade;
+    private LocalDateTime dataHora;
 
-    // Construtor vazio
+    public ConsultaDto(Consulta consulta) {
+        this.paciente = consulta.getPaciente().getNome();
+        this.medico = consulta.getMedico().getNome();
+        this.status = consulta.getStatus();
+        this.dataHora = consulta.getDataHora();
+    }
     public ConsultaDto() {
     }
 
-    // Construtor com parâmetros
-    public ConsultaDto(LocalDateTime dataHora, String status, String observacoes, Long pacienteId, Long cuidadorId) {
-        this.dataHora = dataHora;
-        this.status = status;
-        this.observacoes = observacoes;
-        this.pacienteId = pacienteId;
-        this.cuidadorId = cuidadorId;
+    public String getPaciente() {
+        return paciente;
     }
 
-    // Getters e Setters
-    public LocalDateTime getDataHora() {
-        return dataHora;
+    public void setPaciente(String paciente) {
+        paciente = paciente;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
+    public String getMedico() {
+        return medico;
+    }
+
+    public void setMedico(String medico) {
+        medico = medico;
     }
 
     public String getStatus() {
@@ -39,27 +45,27 @@ public class ConsultaDto {
         this.status = status;
     }
 
-    public String getObservacoes() {
-        return observacoes;
+    public String getPatologia() {
+        return patologia;
     }
 
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
+    public void setPatologia(String patologia) {
+        this.patologia = patologia;
     }
 
-    public Long getPacienteId() {
-        return pacienteId;
+    public String getEspecialidade() {
+        return especialidade;
     }
 
-    public void setPacienteId(Long pacienteId) {
-        this.pacienteId = pacienteId;
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 
-    public Long getCuidadorId() {
-        return cuidadorId;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setCuidadorId(Long cuidadorId) {
-        this.cuidadorId = cuidadorId;
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 }

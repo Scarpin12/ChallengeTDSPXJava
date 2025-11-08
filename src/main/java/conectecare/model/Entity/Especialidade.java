@@ -1,11 +1,12 @@
 package conectecare.model.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity /// uso para buscar no banco
-@Table(name = "ESPECIALIDADES") /// definindo a tabela em que eu vou buscar as colunas
+@Entity
+@Table(name = "ESPECIALIDADES")
 public class Especialidade {
 
     public Especialidade() {
@@ -16,10 +17,10 @@ public class Especialidade {
         this.especialidadeMedico = especialidadeMedico;
     }
 
-    @Id /// marcando como chave primaria
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_especialidades") /// definindo que essa chave vai ser gerada por uma sequencia no banco
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_especialidades")
     @SequenceGenerator(name = "seq_especialidades", sequenceName = "SEQ_ESPECIALIDADES")
-    @Column(name = "ID_ESPECIALIDADE") /// definindo o nome da coluna
+    @Column(name = "ID_ESPECIALIDADE")
     private int id;
 
     @Column(name = "ESPECIALIDADEMEDICO", length = 100, nullable = false, unique = false)
@@ -33,7 +34,7 @@ public class Especialidade {
     )
     private List<Patologia> patologias;
 
-    @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY) /// define relacionamento de n/1 entre as tabelas
+    @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY)
     private List<Medico> medicos;
 
 
