@@ -1,15 +1,11 @@
 package conectecare.controller;
-
-
 import conectecare.model.DTO.CuidadorDto;
-import conectecare.model.DTO.PacienteDto;
 import conectecare.model.Entity.Cuidador;
-import conectecare.model.Entity.Paciente;
 import conectecare.service.CuidadorService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import oracle.jdbc.proxy.annotation.Post;
+
 
 import java.util.List;
 @Path("/cuidadores")
@@ -22,7 +18,7 @@ public class CuidadorController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarCuidadores() {
-        List<Cuidador> cuidadores = cuidadorService.listarTodosCuidadores();
+        List<CuidadorDto> cuidadores = cuidadorService.listarTodosCuidadores();
         return Response.ok(cuidadores).build();
     }
 
@@ -39,10 +35,12 @@ public class CuidadorController {
 
             return Response.created(builder.build()).entity(cuidador).build();
         }catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Erro ao criar cuidador: " + e.getMessage()).build();
+            return Response.status(400)
+                    .entity("Erro de validação: " + e.getMessage()) // <--- Isto é útil!
+                    .build();
         }
-    }
+        }
+
 
     @PUT
     @Path("/{cpf}")
@@ -68,4 +66,4 @@ public class CuidadorController {
                     .entity("Erro ao deletar paciente: " + e.getMessage()).build();
         }
     }
-}
+    }

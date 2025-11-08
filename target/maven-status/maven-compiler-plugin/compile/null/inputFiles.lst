@@ -3,11 +3,14 @@ C:\challenge-java (1)\challenge-java\src\main\java\conectecare\conexao\Credencia
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\ConsultaController.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\CuidadorController.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\PacienteController.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\controller\ViaCepController.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\ConsultaDto.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\CuidadorDto.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\PacienteDto.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\DTO\ViaCepDto.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Consulta.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Cuidador.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Enderecos.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Especialidade.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Medico.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\model\Entity\Paciente.java
@@ -20,6 +23,5 @@ C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\Pacien
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\repository\PatologiaRepository.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ConsultaService.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\CuidadorService.java
-C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\MedicoService.java
 C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\PacienteService.java
-C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\PatologiaService.java
+C:\challenge-java (1)\challenge-java\src\main\java\conectecare\service\ViaCepService.java

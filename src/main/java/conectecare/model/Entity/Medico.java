@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 @DiscriminatorValue("MEDICO")
 public class Medico extends Pessoa{
 
-    public Medico(int id, String nome, String cpf, int idade, String email, String telefoneContato, String senha,  String crm, Especialidade especialidade) {
-        super( id, nome, cpf, idade, email, telefoneContato, senha);
+    public Medico(int id, String nome, int idade, String email, String telefoneContato, String senha,  String crm, Especialidade especialidade) {
+        super( id, nome,  idade, email, telefoneContato, senha);
         this.crm = crm;
         this.especialidade = especialidade;
     }

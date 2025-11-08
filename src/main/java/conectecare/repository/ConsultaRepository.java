@@ -3,33 +3,33 @@ package conectecare.repository;
 import conectecare.model.Entity.Consulta;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
 @ApplicationScoped
 public class ConsultaRepository implements PanacheRepository<Consulta> {
 
-    @Inject
-    EntityManager entityManager;
 
-    public List<Consulta> listarProximasConsultas() {
-        String jpql = "SELECT c FROM Consulta c " +
-                "JOIN c.paciente p_paciente " +
-                "JOIN c.medico p_medico " +
-                "JOIN p_medico.especialidade esp " +
-                "JOIN p_paciente.patologia pat " +
-                "ORDER BY c.dataHora ASC";
-
-        return entityManager.createQuery(jpql, Consulta.class).getResultList();
+    public List<Consulta> listarConsultasPorPaciente(Integer pacienteId) {
+        return find(
+                "SELECT c FROM Consulta c " +
+                        "JOIN FETCH c.paciente p " +
+                        "JOIN FETCH c.medico m " +
+                        "LEFT JOIN FETCH p.patologia pat " +
+                        "LEFT JOIN FETCH m.especialidade esp " +
+                        "WHERE c.paciente.id = ?1 " +
+                        "ORDER BY c.dataHora DESC",
+                pacienteId
+        ).list();
     }
 
+
+
     public List<Consulta> findByMedicoId(Integer medicoId) {
-        return List.of();
+        return list("medico.id", medicoId);
     }
 
     public List<Consulta> findByPacienteId(Integer pacienteId) {
-        return List.of();
+        return list("paciente.id", pacienteId);
     }
 }

@@ -21,86 +21,12 @@ public class MedicoRepository implements PanacheRepository<Medico> {
         return find("crm = ?1", crm).firstResultOptional();
     }
 
-    public Optional<Medico> findByCpf(String cpf) {
-        return find("cpf = ?1", cpf).firstResultOptional();
-    }
-
     public List<Medico> listarTodosMedicos() {
         return list("ORDER BY nome");
     }
 
     public List<Medico> findByEspecialidadeId(Integer especialidadeId) {
         return find("especialidade.id = ?1 ORDER BY nome", especialidadeId).list();
-    }
-
-
-    public List<Medico> findByNome(String nome) {
-        return find("UPPER(nome) LIKE UPPER(?1) ORDER BY nome", "%" + nome + "%").list();
-    }
-
-
-    public boolean existsByCrm(String crm) {
-        return count("crm = ?1", crm) > 0;
-    }
-
-    public boolean existsByCpf(String cpf) {
-        return count("cpf = ?1", cpf) > 0;
-    }
-
-    @Transactional
-    public boolean excluirMedico(String crm) {
-        // Busca o médico pelo CRM
-        Optional<Medico> medicoOpt = findByCrm(crm);
-
-        if (medicoOpt.isEmpty()) {
-            return false;
-        }
-
-        Medico medico = medicoOpt.get();
-
-        // 1. Remove consultas vinculadas (equivalente ao sqlExcluirConsulta)
-        List<Consulta> consultasDoMedico = consultaRepository.find("medico.id = ?1", medico.getId()).list();
-
-        for (Consulta consulta : consultasDoMedico) {
-            consultaRepository.delete(consulta);
-        }
-
-        if (!consultasDoMedico.isEmpty()) {
-            System.out.println("Consultas excluídas: " + consultasDoMedico.size());
-        }
-
-        // 2. Exclui o médico
-        delete(medico);
-
-        System.out.println("Médico excluído com sucesso!");
-        return true;
-    }
-
-    @Transactional
-    public void atualizarMedico(Medico medico, String crmValidacao) {
-        // Busca o médico existente pelo CRM de validação
-        Optional<Medico> medicoExistenteOpt = findByCrm(crmValidacao);
-
-        if (medicoExistenteOpt.isPresent()) {
-            Medico medicoExistente = medicoExistenteOpt.get();
-
-            // Atualiza os campos
-            medicoExistente.setNome(medico.getNome());
-            medicoExistente.setIdade(medico.getIdade());
-            medicoExistente.setEmail(medico.getEmail());
-            medicoExistente.setTelefoneContato(medico.getTelefoneContato());
-            medicoExistente.setCrm(medico.getCrm());
-
-            // Atualiza a especialidade se foi fornecida
-            if (medico.getEspecialidades() != null) {
-                medicoExistente.setEspecialidades(medico.getEspecialidades());
-            }
-
-            // O persist() faz UPDATE automaticamente quando o objeto já tem ID
-            persist(medicoExistente);
-
-            System.out.println("Médico atualizado com sucesso");
-        }
     }
 
     public List<Medico> listarMedicosComEspecialidades() {
@@ -121,7 +47,4 @@ public class MedicoRepository implements PanacheRepository<Medico> {
     }
 
 
-    public long contarMedicos() {
-        return count();
-    }
 }

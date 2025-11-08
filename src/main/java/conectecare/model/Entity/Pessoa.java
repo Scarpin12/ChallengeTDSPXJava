@@ -1,4 +1,7 @@
 package conectecare.model.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 /// mapeando a tabela de pessoas
@@ -11,13 +14,6 @@ import jakarta.persistence.*;
 )
 public abstract class Pessoa {
 
-    public Pessoa(int id, String nome, String cpf, int idade, String email, String telefoneContato, String senha) {
-    }
-
-    public Pessoa() {
-    }
-
-    /// pega a minha primarykey e mapeia ela para conseguir incrementar a cada nova pessoa cadastrada
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoas")
     @SequenceGenerator(
@@ -28,13 +24,9 @@ public abstract class Pessoa {
     @Column(name = "ID")
     private int id;
 
-    /// coluna nome
-
     @Column(name = "NOME", nullable = true, length = 255)
     private String nome;
 
-    @Column(name = "CPF", nullable = true, unique = true, length = 14)
-    private String cpf;
 
     @Column(name = "IDADE", precision = 3)
     private int idade;
@@ -42,40 +34,33 @@ public abstract class Pessoa {
     @Column(name = "EMAIL", length = 255, unique = true)
     private String email;
 
-    @Column(name = "TELEFONECONTATO", length = 20)
+    @Column(name = "TELEFONECONTATO", length = 25)
     private String telefoneContato;
 
     @Column(name = "SENHA", length = 50, nullable = false)
     private String senha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_PATOLOGIA")
-    private Patologia patologia;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference("pessoas-enderecos")
+    @JoinColumn(name = "ID_ENDERECO")
+    private Enderecos enderecos;
 
 
-    public int getId() {
-        return id;
+
+    @Column(name = "ACEITARTERMO", nullable = false)
+    private Boolean aceitarTermo;
+
+
+    public Pessoa() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Pessoa(int id, String nome, int idade, String email, String telefoneContato, String senha, Boolean aceitarTermo) {
     }
 
-    public String getNome() {
-        return nome;
+    public Pessoa(int id, String nome, int idade, String email, String telefoneContato, String senha) {
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
     public int getIdade() {
         return idade;
@@ -101,11 +86,35 @@ public abstract class Pessoa {
         this.email = email;
     }
 
+    public Boolean getAceitarTermo() {
+        return aceitarTermo;
+    }
+
+    public void setAceitarTermo(Boolean aceitarTermo) {
+        this.aceitarTermo = aceitarTermo;
+    }
+
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
