@@ -1,8 +1,10 @@
 # ------------------------------------------------------------------
-# 1. ESTÁGIO DE BUILD (Compilação e Empacotamento do Quarkus)
+# 1. ESTÁGIO DE BUILD (Compilação)
 # ------------------------------------------------------------------
-# Usa a imagem base do Maven e Java
-FROM maven:3.9.6-openjdk-21 AS build
+# CORRIGIDO: Usa a tag 'jdk' em vez de 'openjdk'
+FROM maven:3.9.6-jdk-21 AS build
+
+# ... (restante do build stage)
 
 # Define o diretório de trabalho
 WORKDIR /workspace/app
@@ -33,3 +35,4 @@ EXPOSE 8080
 
 # Comando para iniciar a aplicação
 CMD ["java", "-jar", "/app/quarkus-run.jar"]
+
