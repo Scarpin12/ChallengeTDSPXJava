@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+<<<<<<< HEAD
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="Quarkus" url="file://$PROJECT_DIR$/challenge-java" />
   </component>
@@ -8,6 +9,13 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/challenge-java/pom.xml" />
+=======
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ChallengeJava/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+>>>>>>> 10b3480aed738eec8b5fc49995c4f681ffb65788
       </list>
     </option>
   </component>
