@@ -55,9 +55,9 @@ public class CuidadorController {
     }
 
     @DELETE
-    @Path("/{cpf}")
+    @Path("/{cpfCuidador}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deletarCuidador(@PathParam("cpf") String cpf) {
+    public Response deletarCuidador(@PathParam("cpfCuidador") String cpf) {
         try {
             cuidadorService.excluirCuidador(cpf);
             return Response.noContent().build();

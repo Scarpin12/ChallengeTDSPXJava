@@ -106,6 +106,10 @@ public class CuidadorService {
         return cuidadoresEntities.stream().map(CuidadorDto::new).collect(Collectors.toList());
     }
 
+    public Cuidador buscarPorEmail(String email) {
+        return cuidadorRepository.find("email", email).firstResult();
+    }
+
     @Transactional
     public boolean excluirCuidador(String cpf) {
         return cuidadorRepository.excluirCuidador(cpf);
