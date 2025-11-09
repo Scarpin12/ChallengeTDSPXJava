@@ -13,6 +13,8 @@ import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
+import static io.quarkus.arc.ComponentsProvider.LOG;
+
 @ApplicationScoped
 public class PacienteService {
 
@@ -27,7 +29,6 @@ public class PacienteService {
 
     @Inject
     ViaCepService viaCepService;
-
 
     @Transactional
     public Paciente cadastrarNovoPaciente(PacienteDto pacienteDto) {
@@ -51,12 +52,6 @@ public class PacienteService {
 
         pacienteRepository.persist(paciente);
 
-        Consulta consultaAgendada = consultaService.cadastrarConsultaAutomatica(paciente, pacienteDto.getIdPatologia() );
-
-        System.out.println("Paciente cadastrado com sucesso!\n");
-        if (consultaAgendada != null) {
-            System.out.println("Consulta agendada com sucesso!");
-        }
         return paciente;
     }
 
@@ -86,9 +81,8 @@ public class PacienteService {
     }
 
 
-    public Paciente buscarPorCpf(String cpf) {
-        return pacienteRepository.findByCpf(cpf)
-                .orElseThrow(() -> new NotFoundException("Paciente não encontrado"));
+    public Paciente buscarPorEmail(String email) {
+        return pacienteRepository.find("email", email).firstResult();
     }
 
     @Transactional
