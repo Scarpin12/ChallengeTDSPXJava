@@ -17,7 +17,6 @@ public class PacienteDto {
     }
 
     public PacienteDto(String nome, String cpfPaciente, Integer idade, String email, String telefoneContato,String senha, boolean aceitarTermo, Integer idPatologia, String cep, String logradouro, String cidade, String estado, String complemento, String bairro, String localidade) {
-//        super(cep, logradouro, cidade, estado, complemento, bairro, localidade);
         this.nome = nome;
         this.cpfPaciente = cpfPaciente;
         this.idade = idade;

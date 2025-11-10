@@ -2,9 +2,7 @@ package conectecare.service;
 import conectecare.model.DTO.CuidadorDto;
 import conectecare.model.DTO.ViaCepDto;
 import conectecare.model.Entity.Cuidador;
-import conectecare.model.Entity.Enderecos;
 import conectecare.model.Entity.Paciente;
-import conectecare.model.Entity.Pessoa;
 import conectecare.repository.CuidadorRepository;
 import conectecare.repository.PacienteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class CuidadorService {
+public class CuidadorService{
 
     @Inject
     CuidadorRepository cuidadorRepository;
@@ -25,8 +23,6 @@ public class CuidadorService {
     @Inject
     PacienteRepository pacienteRepository;
 
-    @Inject
-    ViaCepService viaCepService;
 
     @Transactional
     public Cuidador cadastrarEVincularCuidador(CuidadorDto cuidadorDto) {
@@ -56,7 +52,6 @@ public class CuidadorService {
                 Paciente paciente = pacienteRepository.findByCpf(cuidadorDto.getCpfPaciente())
                         .orElseThrow(() -> new NotFoundException("Paciente não encontrado com CPF: " + cuidadorDto.getCpfPaciente()));
 
-                // Verifica se paciente já tem cuidador
                 if (paciente.getCuidadorAssociado() != null) {
                     throw new BadRequestException("Paciente já possui um cuidador vinculado");
                 }
@@ -64,20 +59,6 @@ public class CuidadorService {
                 paciente.setCuidadorAssociado(cuidador);
                 pacienteRepository.persist(paciente);
 
-                if (viaCepDto.getCep() != null && !viaCepDto.getCep().isEmpty()) {
-                    try {
-                        ViaCepDto endereco = viaCepService.buscarEnderecoPorCep(viaCepDto.getCep());
-                        System.out.println("Endereço encontrado: " + endereco.getLogradouro() + ", " + endereco.getLocalidade() + "-" + endereco.getLocalidade());
-
-                        // Aqui você pode salvar o endereço em outra tabela se quiser
-                        // ou apenas usar as informações para validação
-
-                    } catch (Exception e) {
-                        System.out.println("CEP inválido ou não encontrado: " + viaCepDto.getCep());
-                        // Você pode lançar uma exceção ou apenas ignorar, dependendo da regra de negócio
-                    }
-
-                }
             }
         }
         return cuidador;

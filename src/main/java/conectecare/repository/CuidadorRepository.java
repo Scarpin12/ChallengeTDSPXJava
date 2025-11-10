@@ -17,26 +17,6 @@ public class CuidadorRepository implements PanacheRepository<Cuidador> {
     PacienteRepository pacienteRepository;
 
     @Transactional
-    public boolean vincularCuidador(Integer idCuidador, String cpfPaciente) {
-
-        Cuidador cuidador = findById(Long.valueOf(idCuidador));
-        if (cuidador == null) {
-            return false;
-        }
-
-        Optional<Paciente> pacienteOpt = pacienteRepository.findByCpf(cpfPaciente);
-        if (pacienteOpt.isEmpty()) {
-            return false;
-        }
-        Paciente paciente = pacienteOpt.get();
-        paciente.setCuidadorAssociado(cuidador);
-
-        pacienteRepository.persist(paciente);
-
-        return true;
-    }
-
-    @Transactional
     public boolean excluirCuidador(String cpf) {
 
         Optional<Cuidador> cuidadorOpt = find("cpfCuidador", cpf).firstResultOptional();

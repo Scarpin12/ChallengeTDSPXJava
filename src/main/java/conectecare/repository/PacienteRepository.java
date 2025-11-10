@@ -19,13 +19,8 @@ public class PacienteRepository implements PanacheRepository<Paciente> {
         if (pacienteOpt.isEmpty()) {
             return false;
         }
-
         Paciente paciente = pacienteOpt.get();
-//
-//        long consultasExcluidas = delete("paciente", paciente);
-//        if (consultasExcluidas > 0) {
-//            System.out.println("Consultas excluídas: " + consultasExcluidas);
-//        }
+
         delete(paciente);
 
         return true;
