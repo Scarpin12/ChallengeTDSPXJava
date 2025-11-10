@@ -24,11 +24,6 @@ public class ConsultaRepository implements PanacheRepository<Consulta> {
     }
 
 
-
-    public List<Consulta> findByMedicoId(Integer medicoId) {
-        return list("medico.id", medicoId);
-    }
-
     public List<Consulta> findByPacienteId(Integer pacienteId) {
         return list("paciente.id", pacienteId);
     }

@@ -18,8 +18,6 @@ public class Cuidador extends Pessoa{
     @Column(name = "CPF_CUIDADOR",  unique = true, length = 14)
     private String cpfCuidador;
 
-//    @Column(name = "CPF_PACIENTE", unique = true, length = 14)
-//    private String cpfPaciente;
 
     @Column(name = "CORRELACAOPACIENTE", length = 50)
     private String correlacaoPaciente;

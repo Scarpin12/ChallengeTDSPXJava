@@ -24,11 +24,6 @@ public class PacienteService {
     @Inject
     PatologiaRepository patologiaRepository;
 
-    @Inject
-    ConsultaService consultaService;
-
-    @Inject
-    ViaCepService viaCepService;
 
     @Transactional
     public Paciente cadastrarNovoPaciente(PacienteDto pacienteDto) {

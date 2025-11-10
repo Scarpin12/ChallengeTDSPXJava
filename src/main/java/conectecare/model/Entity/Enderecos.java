@@ -35,9 +35,6 @@ public class Enderecos {
     @Column(name = "LOCALIDADE", length = 100)
     private String localidade;
 
-//    @OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-//    @JsonBackReference("pessoa-endereco")
-//    private Pessoa pessoa;
 
 
     public Enderecos() {
