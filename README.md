@@ -35,29 +35,37 @@ Repository: Acesso a dados (Panache)
 Entity: Modelo de domínio
 
 DTO: Objetos de transferência de dados
+
 ---
-Tecnologias Utilizadas
-Java 17+ - Linguagem de programação
 
-Quarkus 3.0+ - Framework para aplicações cloud-native
+</div>
 
-Hibernate Panache - ORM simplificado
+---
 
-JAX-RS - API REST
+## 🚀 Tecnologias Utilizadas
 
-CDI - Injeção de dependência
+### 🔧 Backend
+- **Java 17+** - Linguagem de programação
+- **Quarkus 3.0+** - Framework para aplicações cloud-native
+- **Hibernate Panache** - ORM simplificado
+- **JAX-RS** - API REST
+- **CDI** - Injeção de dependência
 
-Banco de Dados
-OracleSql - Banco de dados relacional
+### 🗃️ Banco de Dados
+- **Oracle SQL** - Banco de dados relacional empresarial
+- **JPA/Hibernate** - Mapeamento objeto-relacional
+- **Sequences** - Para geração de IDs automáticos
+- **Discriminator Column** - Herança com tabela única
 
-JPA/Hibernate - Mapeamento objeto-relacional
+### 🛠️ Ferramentas de Desenvolvimento
+- **Maven** - Gerenciamento de dependências
+- **SQL Developer** - Gerenciamento do Oracle
+- **Git** - Controle de versão
 
-Ferramentas de Desenvolvimento
-Maven - Gerenciamento de dependências
+---
 
-Docker - Containerização (opcional)
+## 📁 Estrutura do Projeto
 
-Git - Controle de versão
 ---
 🛡️ Módulo Cuidador
 
@@ -202,6 +210,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
