@@ -128,8 +128,11 @@ Crie o banco de dados:
 CREATE DATABASE conectecare;
 
 quarkus.datasource.db-kind=oracle
+
 quarkus.datasource.username=seu_usuario
+
 quarkus.datasource.password=sua_senha
+
 quarkus.datasource.jdbc.url=jdbc:oracle://localhost:5432/conectecare
 
 Execução da Aplicação
@@ -199,6 +202,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
