@@ -67,19 +67,33 @@ DTO: Objetos de transferência de dados
 ## 📁 Estrutura do Projeto
 conectecare/
 ├── src/
+
 │ └── main/
+
 │ └── java/
+
 │ └── conectecare/
+
 │ ├── controller/ # 🎯 Endpoints REST
+
 │ ├── service/ # ⚙️ Lógica de negócio
+
 │ ├── repository/ # 💾 Acesso a dados
+
 │ ├── model/
+
 │ │ ├── entity/ # 🗂️ Entidades JPA
+
 │ │ └── dto/ # 📤 Data Transfer Objects
+
 │ └── conexao/ # 🔌 Configurações
+
 ├── src/main/resources/
+
 │ ├── application.properties # ⚙️ Configurações
+
 │ └── META-INF/resources/ # 📁 Recursos estáticos
+
 └── README.md
 
 ---
@@ -219,6 +233,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
