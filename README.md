@@ -5,10 +5,12 @@
 ![Java](https://img.shields.io/badge/Java-17+-blue) ![Quarkus](https://img.shields.io/badge/Quarkus-3.0+-red) ![Oracle](https://img.shields.io/badge/Oracle%20SQL-19c+-red) ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
-📋 Sobre o Projeto
-O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java com Quarkus, projetado para conectar pacientes, cuidadores e médicos de forma eficiente e organizada.
----
-🎯 Objetivos
+## 📋 Sobre o Projeto
+
+<div align="center">
+  
+### 🎯 Objetivo Principal
+
 Facilitar o cadastro e gerenciamento de pacientes e suas patologias
 
 Vincular cuidadores a pacientes específicos
@@ -228,6 +230,7 @@ Abra um Pull Request
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
