@@ -2,13 +2,7 @@
 
 <div align="center">
 
-![Java](https://img.shields.io/badge/Java-17+-blue)
-
-![Quarkus](https://img.shields.io/badge/Quarkus-3.0+-red)
-
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-blue)
-
-![License](https://img.shields.io/badge/License-MIT-green)
+![Java](https://img.shields.io/badge/Java-17+-blue) ![Quarkus](https://img.shields.io/badge/Quarkus-3.0+-red) ![Oracle](https://img.shields.io/badge/Oracle%20SQL-19c+-red) ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 📋 Sobre o Projeto
@@ -208,6 +202,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
