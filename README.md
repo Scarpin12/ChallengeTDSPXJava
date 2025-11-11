@@ -7,7 +7,6 @@
 ---
 ## 📋 Sobre o Projeto
 
-<div align="center">
   
 ### 🎯 Objetivo Principal
 
@@ -230,6 +229,7 @@ Abra um Pull Request
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
