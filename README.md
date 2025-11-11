@@ -60,6 +60,7 @@ Docker - Containerização (opcional)
 Git - Controle de versão
 ---
 🛡️ Módulo Cuidador
+
 ✅ Cadastro flexível com vínculo direto ao paciente
 
 ✅ Validação de vínculo (um cuidador por paciente)
@@ -67,6 +68,7 @@ Git - Controle de versão
 ✅ Gestão completa (CRUD) de cuidadores
 
 🩺 Módulo Médico
+
 ✅ Cadastro especializado com CRM e especialidade
 
 ✅ Associação com patologias tratadas
@@ -74,6 +76,7 @@ Git - Controle de versão
 ✅ Busca por especialidade e patologia
 
 📅 Módulo Consultas
+
 ✅ Agendamento inteligente vinculando paciente e médico
 
 ✅ Status automático (AGENDADA, REALIZADA, CANCELADA)
@@ -83,6 +86,7 @@ Git - Controle de versão
 ✅ Gestão de atualizações e cancelamentos
 
 🔐 Módulo Autenticação
+
 ✅ Login unificado para pacientes e cuidadores
 
 ✅ Validação de credenciais
@@ -91,6 +95,7 @@ Git - Controle de versão
 ---
 🗃️ Modelo de Dados
 Entidades Principais
+
 Pessoa (classe abstrata) - Dados base para todos os usuários
 
 Paciente - Especialização com patologia e cuidador
@@ -106,7 +111,9 @@ Patologia - Catálogo de condições médicas
 Especialidade - Catálogo de especialidades médicas
 ---
 🚀 Como Executar
+
 Pré-requisitos
+
 Java 17 ou superior
 
 Maven 3.8+
@@ -174,6 +181,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
