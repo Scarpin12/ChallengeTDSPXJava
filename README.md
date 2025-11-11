@@ -6,19 +6,12 @@ https://img.shields.io/badge/License-MIT-green
 
 Conectar pacientes com médicos especializados baseado em patologias
 
-</div>
-
 📋 Sobre o Projeto
-O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java com Quarkus, projetado para conectar pacientes, cuidadores e médicos de forma eficiente e organizada.
+<div align="center">
+🎯 Objetivo Principal
+O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java com Quarkus, projetado para conectar pacientes, cuidadores e médicos de forma eficiente e organizada, facilitando o agendamento de consultas baseado em especialidades médicas e patologias.
 
-🎯 Objetivos
-Facilitar o cadastro e gerenciamento de pacientes e suas patologias
-
-Vincular cuidadores a pacientes específicos
-
-Agendar e gerenciar consultas médicas
-
-Conectar pacientes com médicos especializados baseado em patologias
+</div>
 
 🏗️ Arquitetura do Sistema
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -174,4 +167,5 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
