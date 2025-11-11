@@ -1,12 +1,15 @@
-ConecteCare - Sistema de Gestão de Saúde
+# ConecteCare - Sistema de Gestão de Saúde
 
-https://img.shields.io/badge/Java-17%252B-blue
+<div align="center">
 
-https://img.shields.io/badge/Quarkus-3.0%252B-red
+![Java](https://img.shields.io/badge/Java-17+-blue)
 
-https://img.shields.io/badge/PostgreSQL-15%252B-blue
+![Quarkus](https://img.shields.io/badge/Quarkus-3.0+-red)
 
-https://img.shields.io/badge/License-MIT-green
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-blue)
+
+![License](https://img.shields.io/badge/License-MIT-green)
+
 ---
 📋 Sobre o Projeto
 O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java com Quarkus, projetado para conectar pacientes, cuidadores e médicos de forma eficiente e organizada.
@@ -205,6 +208,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
