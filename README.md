@@ -26,7 +26,6 @@ Conectar pacientes com médicos especializados baseado em patologias
 - Entity: Modelo de domínio
 - DTO: Objetos de transferência de dados
 
----
 
 </div>
 
@@ -222,6 +221,7 @@ Abra um Pull Request
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
