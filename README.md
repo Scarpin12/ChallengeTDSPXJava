@@ -1,18 +1,21 @@
-<div align="center">
-https://img.shields.io/badge/Java-17+-blue
-https://img.shields.io/badge/Quarkus-3.0+-red
-https://img.shields.io/badge/PostgreSQL-15+-blue
+ConecteCare - Sistema de Gestão de Saúde
+
+https://img.shields.io/badge/Java-17%252B-blue
+https://img.shields.io/badge/Quarkus-3.0%252B-red
+https://img.shields.io/badge/PostgreSQL-15%252B-blue
 https://img.shields.io/badge/License-MIT-green
+---
+📋 Sobre o Projeto
+O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java com Quarkus, projetado para conectar pacientes, cuidadores e médicos de forma eficiente e organizada.
+---
+🎯 Objetivos
+Facilitar o cadastro e gerenciamento de pacientes e suas patologias
+
+Vincular cuidadores a pacientes específicos
+
+Agendar e gerenciar consultas médicas
 
 Conectar pacientes com médicos especializados baseado em patologias
-
-📋 Sobre o Projeto
-<div align="center">
-🎯 Objetivo Principal
-O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java com Quarkus, projetado para conectar pacientes, cuidadores e médicos de forma eficiente e organizada, facilitando o agendamento de consultas baseado em especialidades médicas e patologias.
-
-</div>
-
 ---
 
 # 🏗️ Arquitetura do Sistema
@@ -20,7 +23,7 @@ O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java c
 │   Frontend      │ →  │   Backend        │ →  │   Banco de      │
 │   (Web/Mobile)  │    │   (Quarkus)      │    │   Dados         │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
-
+---
 Camadas da Aplicação
 
 Controller: Endpoints REST API
@@ -32,7 +35,7 @@ Repository: Acesso a dados (Panache)
 Entity: Modelo de domínio
 
 DTO: Objetos de transferência de dados
-
+---
 Tecnologias Utilizadas
 Java 17+ - Linguagem de programação
 
@@ -55,7 +58,7 @@ Maven - Gerenciamento de dependências
 Docker - Containerização (opcional)
 
 Git - Controle de versão
-
+---
 🛡️ Módulo Cuidador
 ✅ Cadastro flexível com vínculo direto ao paciente
 
@@ -85,7 +88,7 @@ Git - Controle de versão
 ✅ Validação de credenciais
 
 ✅ Sessão de usuário
-
+---
 🗃️ Modelo de Dados
 Entidades Principais
 Pessoa (classe abstrata) - Dados base para todos os usuários
@@ -101,7 +104,7 @@ Consulta - Agendamentos entre pacientes e médicos
 Patologia - Catálogo de condições médicas
 
 Especialidade - Catálogo de especialidades médicas
-
+---
 🚀 Como Executar
 Pré-requisitos
 Java 17 ou superior
@@ -111,10 +114,12 @@ Maven 3.8+
 Oracle SQL
 
 Quarkus CLI (opcional)
-
+---
 Configuração do Banco de Dados
+
 Crie o banco de dados:
 CREATE DATABASE conectecare;
+
 quarkus.datasource.db-kind=oracle
 quarkus.datasource.username=seu_usuario
 quarkus.datasource.password=sua_senha
@@ -124,7 +129,7 @@ Execução da Aplicação
 Clone o repositório:
 git clone https://github.com/seu-usuario/conectecare.git
 cd conectecare
-
+---
 📚 API Endpoints
 
 Pacientes
@@ -148,7 +153,7 @@ POST	/consultas	Agenda nova consulta
 Autenticação
 Método	Endpoint	Descrição
 POST	/login	Login no sistema
-
+---
 🤝 Contribuição
 Fork o projeto
 
@@ -159,7 +164,7 @@ Commit suas mudanças (git commit -m 'Add some AmazingFeature')
 Push para a branch (git push origin feature/AmazingFeature)
 
 Abra um Pull Request
-
+---
 👥 Autores
 Seu Nome - Scarpin12
 
@@ -169,5 +174,6 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
