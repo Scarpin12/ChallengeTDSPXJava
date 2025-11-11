@@ -65,41 +65,50 @@ DTO: Objetos de transferência de dados
 ---
 
 ## 📁 Estrutura do Projeto
+conectecare/
+├── src/
+│ └── main/
+│ └── java/
+│ └── conectecare/
+│ ├── controller/ # 🎯 Endpoints REST
+│ ├── service/ # ⚙️ Lógica de negócio
+│ ├── repository/ # 💾 Acesso a dados
+│ ├── model/
+│ │ ├── entity/ # 🗂️ Entidades JPA
+│ │ └── dto/ # 📤 Data Transfer Objects
+│ └── conexao/ # 🔌 Configurações
+├── src/main/resources/
+│ ├── application.properties # ⚙️ Configurações
+│ └── META-INF/resources/ # 📁 Recursos estáticos
+└── README.md
 
 ---
-🛡️ Módulo Cuidador
+### 👥 Módulo Paciente
+- ✅ **Cadastro completo** com dados pessoais e patologia
+- ✅ **Vínculo automático** com especialistas baseado na patologia
+- ✅ **Gestão completa** (CRUD) de pacientes
+- ✅ **Busca por CPF e email**
 
-✅ Cadastro flexível com vínculo direto ao paciente
+### 🛡️ Módulo Cuidador
+- ✅ **Cadastro flexível** com vínculo direto ao paciente
+- ✅ **Validação de vínculo** (um cuidador por paciente)
+- ✅ **Gestão completa** (CRUD) de cuidadores
 
-✅ Validação de vínculo (um cuidador por paciente)
+### 🩺 Módulo Médico
+- ✅ **Cadastro especializado** com CRM e especialidade
+- ✅ **Associação com patologias** tratadas
+- ✅ **Busca por especialidade e patologia**
 
-✅ Gestão completa (CRUD) de cuidadores
+### 📅 Módulo Consultas
+- ✅ **Agendamento inteligente** vinculando paciente e médico
+- ✅ **Status automático** (AGENDADA, REALIZADA, CANCELADA)
+- ✅ **Listagem por paciente e médico**
+- ✅ **Gestão de atualizações e cancelamentos**
 
-🩺 Módulo Médico
-
-✅ Cadastro especializado com CRM e especialidade
-
-✅ Associação com patologias tratadas
-
-✅ Busca por especialidade e patologia
-
-📅 Módulo Consultas
-
-✅ Agendamento inteligente vinculando paciente e médico
-
-✅ Status automático (AGENDADA, REALIZADA, CANCELADA)
-
-✅ Listagem por paciente e médico
-
-✅ Gestão de atualizações e cancelamentos
-
-🔐 Módulo Autenticação
-
-✅ Login unificado para pacientes e cuidadores
-
-✅ Validação de credenciais
-
-✅ Sessão de usuário
+### 🔐 Módulo Autenticação
+- ✅ **Login unificado** para pacientes e cuidadores
+- ✅ **Validação de credenciais**
+- ✅ **Sessão de usuário**
 ---
 🗃️ Modelo de Dados
 Entidades Principais
@@ -210,6 +219,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
