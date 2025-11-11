@@ -13,7 +13,9 @@ O ConecteCare é um sistema completo de gestão de saúde desenvolvido em Java c
 
 </div>
 
-🏗️ Arquitetura do Sistema
+---
+
+# 🏗️ Arquitetura do Sistema
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   Frontend      │ →  │   Backend        │ →  │   Banco de      │
 │   (Web/Mobile)  │    │   (Quarkus)      │    │   Dados         │
