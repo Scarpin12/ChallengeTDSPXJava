@@ -134,34 +134,52 @@ quarkus.datasource.jdbc.url=jdbc:oracle://localhost:5432/conectecare
 
 Execução da Aplicação
 Clone o repositório:
+
 git clone https://github.com/seu-usuario/conectecare.git
+
 cd conectecare
 ---
 📚 API Endpoints
 
 Pacientes
 Método	Endpoint	Descrição
+
 GET	/pacientes	Lista todos os pacientes
+
 POST	/pacientes	Cria um novo paciente
+
 PUT	/pacientes/{cpf}	Atualiza paciente por CPF
+
 DELETE	/pacientes/{cpf}	Exclui paciente por CPf
 
 Cuidadores
+
 Método	Endpoint	Descrição
+
 GET	/cuidadores	Lista todos os cuidadores
+
 POST	/cuidadores	Cria um novo cuidador
+
 PUT	/cuidadores/{cpf}	Atualiza cuidador por CPF
+
 DELETE	/cuidadores/{cpf}	Exclui cuidador por CPF
 
 Consultas
+
 Método	Endpoint	Descrição
+
 GET	/consultas/paciente/{id}	Consultas por paciente
+
 POST	/consultas	Agenda nova consulta
+
 Autenticação
+
 Método	Endpoint	Descrição
+
 POST	/login	Login no sistema
 ---
 🤝 Contribuição
+
 Fork o projeto
 
 Crie uma branch para sua feature (git checkout -b feature/AmazingFeature)
@@ -181,6 +199,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
