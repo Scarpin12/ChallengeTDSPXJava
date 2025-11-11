@@ -24,17 +24,13 @@ Conectar pacientes com médicos especializados baseado em patologias
 │   (Web/Mobile)  │    │   (Quarkus)      │    │   Dados         │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ---
-Camadas da Aplicação
+### Camadas da Aplicação
 
-Controller: Endpoints REST API
-
-Service: Lógica de negócio
-
-Repository: Acesso a dados (Panache)
-
-Entity: Modelo de domínio
-
-DTO: Objetos de transferência de dados
+- Controller: Endpoints REST API
+- Service: Lógica de negócio
+- Repository: Acesso a dados (Panache)
+- Entity: Modelo de domínio
+- DTO: Objetos de transferência de dados
 
 ---
 
@@ -225,14 +221,14 @@ Push para a branch (git push origin feature/AmazingFeature)
 Abra um Pull Request
 ---
 👥 Autores
-Seu Nome - Scarpin12
+- Scarpin12
 
 🙏 Agradecimentos
-Equipe de desenvolvimento
 
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
