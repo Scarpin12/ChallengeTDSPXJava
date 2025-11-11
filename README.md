@@ -1,8 +1,11 @@
 ConecteCare - Sistema de Gestão de Saúde
 
 https://img.shields.io/badge/Java-17%252B-blue
+
 https://img.shields.io/badge/Quarkus-3.0%252B-red
+
 https://img.shields.io/badge/PostgreSQL-15%252B-blue
+
 https://img.shields.io/badge/License-MIT-green
 ---
 📋 Sobre o Projeto
@@ -202,6 +205,7 @@ Equipe de desenvolvimento
 Comunidade Quarkus
 
 Todos os contribuidores
+
 
 
 
